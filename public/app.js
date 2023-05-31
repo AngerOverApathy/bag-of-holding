@@ -24,6 +24,11 @@ const fetchData = async (index) => {
 
 
         console.log('Equipment Data:', equipmentData);
+        console.log(equipmentData.name);
+        console.log(equipmentData.category_range);
+        console.log(equipmentData.cost.quantity);
+
+
         console.log('Magic Items Data:', magicItemsData);
         console.log('Weapon Properties Data:', weaponPropertiesData);
     
@@ -35,23 +40,24 @@ const fetchData = async (index) => {
     };
     
     const populateEquipmentList = (equipmentData) => {
-    
-      if (Array.isArray(equipmentData)) {
-        equipmentData.forEach(equipmentItem => {
+        const equipmentList = document.getElementById('equipment');
+        equipmentList.innerHTML = '';
+      
+        if (equipmentData) {
           const li = document.createElement('li');
           li.innerHTML = `
-            <strong>Name:</strong> ${equipmentItem.name}<br>
-            <strong>Category:</strong> ${equipmentItem.category_range}<br>
-            <strong>Cost:</strong> ${equipmentItem.cost.quantity} ${equipmentItem.cost.unit}<br>
-            <strong>Damage:</strong> ${equipmentItem.damage.damage_dice}<br>
-            <strong>Damage Type:</strong> ${equipmentItem.damage.damage_type.name}<br>
-            <strong>Range:</strong> Long: ${equipmentItem.range.long}, Normal: ${equipmentItem.range.normal}<br>
-            <strong>Weight:</strong> ${equipmentItem.weight}
+            <strong>Name:</strong> ${equipmentData.name}<br>
+            <strong>Category:</strong> ${equipmentData.category_range}<br>
+            <strong>Cost:</strong> ${equipmentData.cost.quantity} ${equipmentData.cost.unit}<br>
+            <strong>Damage:</strong> ${equipmentData.damage.damage_dice}<br>
+            <strong>Damage Type:</strong> ${equipmentData.damage.damage_type.name}<br>
+            <strong>Range:</strong> Long: ${equipmentData.range.long}, Normal: ${equipmentData.range.normal}<br>
+            <strong>Weight:</strong> ${equipmentData.weight}
           `;
           equipmentList.appendChild(li);
-        });
-    }
+        }
 };
+
     
 submitBtn.addEventListener('click', function() {
     const userInputIndex = document.getElementById('userInput').value;
