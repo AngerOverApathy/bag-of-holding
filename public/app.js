@@ -51,16 +51,15 @@ const fetchData = async (index) => {
       
           li.innerHTML = `
             <strong>Name:</strong> ${equipmentData.name}<br>
-            <strong>Equipment Category:</strong> ${equipmentData.equipment_category.name}<br>
-            <strong>Weapon Category:</strong> ${equipmentData.weapon_category}<br>
-            <strong>Weapon Range:</strong> ${equipmentData.weapon_range}<br>
-            <strong>Cost:</strong> ${equipmentData.cost.quantity} ${equipmentData.cost.unit}<br>
+            <strong>Weapon Category:</strong> ${equipmentData.category_range}<br>
             <strong>Damage:</strong> ${equipmentData.damage.damage_dice}<br>
             <strong>Damage Type:</strong> ${equipmentData.damage.damage_type.name}<br>
             <strong>Range:</strong> Normal: ${equipmentData.range.normal}<br>
-            <strong>Weight:</strong> ${equipmentData.weight}<br>
-            <strong>Properties:</strong> ${properties}<br>
             <strong>Throw Range:</strong> ${throwRange}<br>
+            <strong>Properties:</strong> ${properties}<br>
+            <strong>Equipment Category:</strong> ${equipmentData.equipment_category.name}<br>
+            <strong>Cost:</strong> ${equipmentData.cost.quantity} ${equipmentData.cost.unit}<br>
+            <strong>Weight:</strong> ${equipmentData.weight}<br>
           `;
       
           equipmentList.appendChild(li);
