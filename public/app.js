@@ -45,18 +45,28 @@ const fetchData = async (index) => {
       
         if (equipmentData) {
           const li = document.createElement('li');
+      
+          const properties = equipmentData.properties.map(property => property.name).join(', ');
+          const throwRange = equipmentData.throw_range ? `Normal: ${equipmentData.throw_range.normal}, Long: ${equipmentData.throw_range.long}` : 'N/A';
+      
           li.innerHTML = `
             <strong>Name:</strong> ${equipmentData.name}<br>
-            <strong>Category:</strong> ${equipmentData.category_range}<br>
+            <strong>Equipment Category:</strong> ${equipmentData.equipment_category.name}<br>
+            <strong>Weapon Category:</strong> ${equipmentData.weapon_category}<br>
+            <strong>Weapon Range:</strong> ${equipmentData.weapon_range}<br>
             <strong>Cost:</strong> ${equipmentData.cost.quantity} ${equipmentData.cost.unit}<br>
             <strong>Damage:</strong> ${equipmentData.damage.damage_dice}<br>
             <strong>Damage Type:</strong> ${equipmentData.damage.damage_type.name}<br>
-            <strong>Range:</strong> Long: ${equipmentData.range.long}, Normal: ${equipmentData.range.normal}<br>
-            <strong>Weight:</strong> ${equipmentData.weight}
+            <strong>Range:</strong> Normal: ${equipmentData.range.normal}<br>
+            <strong>Weight:</strong> ${equipmentData.weight}<br>
+            <strong>Properties:</strong> ${properties}<br>
+            <strong>Throw Range:</strong> ${throwRange}<br>
           `;
+      
           equipmentList.appendChild(li);
         }
 };
+      
 
     
 submitBtn.addEventListener('click', function() {
