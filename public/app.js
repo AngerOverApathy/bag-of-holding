@@ -48,11 +48,14 @@ const fetchData = async (index) => {
       
           const properties = equipmentData.properties.map(property => property.name).join(', ');
           const throwRange = equipmentData.throw_range ? `Normal: ${equipmentData.throw_range.normal}, Long: ${equipmentData.throw_range.long}` : 'N/A';
+          const twoHanded = equipmentData.two_handed_damage ? `${equipmentData.two_handed_damage.damage_dice}` : 'N/A';
+
       
           li.innerHTML = `
             <strong>Name:</strong> ${equipmentData.name}<br>
             <strong>Weapon Category:</strong> ${equipmentData.category_range}<br>
             <strong>Damage:</strong> ${equipmentData.damage.damage_dice}<br>
+            <strong>Two-Handed Damage:</strong> ${twoHanded}<br>
             <strong>Damage Type:</strong> ${equipmentData.damage.damage_type.name}<br>
             <strong>Range:</strong> Normal: ${equipmentData.range.normal}<br>
             <strong>Throw Range:</strong> ${throwRange}<br>
