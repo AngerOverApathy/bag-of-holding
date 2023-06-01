@@ -6,4 +6,18 @@
     flex: 1;
     padding: 1em;
 }
+
+.hidden {
+    display: none;
+}
+  
+.equipment-see-more-button,
+.magic-item-see-more-button {
+    background-color: #f0f0f0;
+    color: #333;
+    border: none;
+    padding: 5px 10px;
+    margin-top: 10px;
+    cursor: pointer;
+}
   
