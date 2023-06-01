@@ -29,7 +29,7 @@ app.listen(PORT, () => {
 });
 
 // Route to handle the equipment form submission
-app.post('/equipment', async (req, res) => {
+app.post('/equipment', (req, res) => {
   // Extract form data for equipment
   const {
     name,
@@ -45,105 +45,84 @@ app.post('/equipment', async (req, res) => {
     two_handed_damage,
   } = req.body;
 
-  try {
-    // Check if the equipment already exists in the database
-    let existingEquipment = await Equipment.findOne({ name });
+  // Extract the necessary properties
+  const quantity = cost.quantity;
+  const unit = cost.unit;
+  const damageDice = damage.damage_dice;
+  const damageTypeName = damage.damage_type.name;
+  const equipmentCategoryName = equipment_category.name;
+  const propertyNames = properties.map(property => property.name);
+  const ranges = range ? Object.values(range) : []; // Get all range values if available
 
-    if (existingEquipment) {
-      // Equipment already exists, update its details
-      existingEquipment.category = category_range;
-      existingEquipment.cost = { quantity: cost.quantity, unit: cost.unit };
-      existingEquipment.damage = {
-        damage_dice: damage.damage_dice,
-        damage_type: { name: damage.damage_type.name },
-      };
-      existingEquipment.range = range ? Object.values(range) : [];
-      existingEquipment.throwRange = {
-        normal: throwRangeNormal || null,
-        long: throwRangeLong || null,
-      };
-      existingEquipment.properties = properties.map(property => property.name);
-      existingEquipment.equipmentCategory = equipment_category.name;
-      existingEquipment.weight = weight;
-      existingEquipment.two_handed_damage = two_handed_damage
-        ? {
-            damage_dice: two_handed_damage.damage_dice,
-            damage_type: { name: two_handed_damage.damage_type.name },
-          }
-        : null;
+  // Create a new Equipment instance
+  const newEquipment = new Equipment({
+    name,
+    category: category_range,
+    cost: {
+      quantity,
+      unit,
+    },
+    damage: {
+      damage_dice: damageDice,
+      damage_type: {
+        name: damageTypeName,
+      },
+    },
+    range: ranges,
+    throwRange: {
+      normal: throwRangeNormal || null, // Use null for items without a throw range
+      long: throwRangeLong || null, // Use null for items without a throw range
+    },
+    properties: propertyNames,
+    equipmentCategory: equipmentCategoryName,
+    weight,
+    two_handed_damage: two_handed_damage
+      ? {
+          damage_dice: two_handed_damage.damage_dice,
+          damage_type: {
+            name: two_handed_damage.damage_type.name,
+          },
+        }
+      : null,
+  });
 
-      await existingEquipment.save();
+  // Save the new equipment item to the database
+  newEquipment.save((err) => {
+    if (err) {
+      console.error('Error saving equipment:', err);
+      res.sendStatus(500);
     } else {
-      // Equipment doesn't exist, create a new item
-      const newEquipment = new Equipment({
-        name,
-        category: category_range,
-        cost: { quantity: cost.quantity, unit: cost.unit },
-        damage: {
-          damage_dice: damage.damage_dice,
-          damage_type: { name: damage.damage_type.name },
-        },
-        range: range ? Object.values(range) : [],
-        throwRange: {
-          normal: throwRangeNormal || null,
-          long: throwRangeLong || null,
-        },
-        properties: properties.map(property => property.name),
-        equipmentCategory: equipment_category.name,
-        weight,
-        two_handed_damage: two_handed_damage
-          ? {
-              damage_dice: two_handed_damage.damage_dice,
-              damage_type: { name: two_handed_damage.damage_type.name },
-            }
-          : null,
-      });
-
-      await newEquipment.save();
+      console.log('Equipment saved successfully');
+      res.redirect('/');
     }
-
-    console.log('Equipment saved successfully');
-    res.redirect('/');
-  } catch (error) {
-    console.error('Error saving equipment:', error);
-    res.sendStatus(500);
-  }
+  });
 });
 
 // Route to handle the magic items form submission
-app.post('/magic-items', async (req, res) => {
+app.post('/magic-items', (req, res) => {
   // Extract form data for magic items
   const { name, equipmentCategoryName, rarityName, description } = req.body;
 
-  try {
-    // Check if the magic item already exists in the database
-    let existingMagicItem = await MagicItem.findOne({ name });
+  // Create a new MagicItem instance
+  const newMagicItem = new MagicItem({
+    name,
+    equipmentCategory: {
+      name: equipmentCategoryName,
+    },
+    rarity: {
+      name: rarityName,
+    },
+    description: description.split('\n'), // Split the description into an array of strings
+  });
 
-    if (existingMagicItem) {
-      // Magic item already exists, update its details
-      existingMagicItem.equipmentCategory.name = equipmentCategoryName;
-      existingMagicItem.rarity.name = rarityName;
-      existingMagicItem.description = description.split('\n');
-
-      await existingMagicItem.save();
+  // Save the new magic item to the database
+  newMagicItem.save((err) => {
+    if (err) {
+      console.error('Error saving magic item:', err);
+      res.sendStatus(500);
     } else {
-      // Magic item doesn't exist, create a new item
-      const newMagicItem = new MagicItem({
-        name,
-        equipmentCategory: { name: equipmentCategoryName },
-        rarity: { name: rarityName },
-        description: description.split('\n'),
-      });
-
-      await newMagicItem.save();
+      console.log('Magic item saved successfully');
+      res.redirect('/');
     }
-
-    console.log('Magic item saved successfully');
-    res.redirect('/');
-  } catch (error) {
-    console.error('Error saving magic item:', error);
-    res.sendStatus(500);
-  }
+  });
 });
-
-

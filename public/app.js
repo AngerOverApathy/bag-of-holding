@@ -64,7 +64,6 @@ const populateEquipmentList = (equipmentData) => {
           <strong>Equipment Category:</strong> ${equipmentData.equipment_category.name}<br>
           <strong>Cost:</strong> ${equipmentData.cost.quantity} ${equipmentData.cost.unit}<br>
           <strong>Weight:</strong> ${equipmentData.weight}<br>
-          <strong>Description:</strong> ${equipmentData.desc}<br>
         </div>
         <button class="equipment-see-more-button">See More</button>
       </div>
@@ -122,94 +121,10 @@ submitBtn.addEventListener('click', async function() {
   await fetchData(userInputIndex);
 });
 
-// // Add Equipment function
-// function addEquipment(event) {
-//   event.preventDefault();
 
-//   const name = document.querySelector('#equipmentName').value;
-//   const categoryRange = document.querySelector('#equipmentCategory').value;
-//   const costQuantity = document.querySelector('#costQuantity').value;
-//   const costUnit = document.querySelector('#costUnit').value;
-//   const damageDice = document.querySelector('#damageDice').value;
-//   const damageTypeName = document.querySelector('#damageTypeName').value;
 
-//   // Extract values for other equipment properties from the input fields
 
-//   const newEquipment = {
-//     name,
-//     category_range: categoryRange,
-//     cost: {
-//       quantity: costQuantity,
-//       unit: costUnit,
-//     },
-//     damage: {
-//       damage_dice: damageDice,
-//       damage_type: {
-//         name: damageTypeName,
-//       },
-//     },
-//     // Assign values for other equipment properties accordingly
-//   };
 
-//   // Send a POST request to the server to save the new equipment
-//   fetch('/equipment', {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//     body: JSON.stringify(newEquipment),
-//   })
-//     .then(response => response.json())
-//     .then(data => {
-//       console.log('New equipment added:', data);
-//       // Update the equipment list on the page if desired
-//     })
-//     .catch(error => {
-//       console.error('Error adding equipment:', error);
-//     });
-// }
 
-// // Add Magic Item function
-// function addMagicItem(event) {
-//   event.preventDefault();
 
-//   const name = document.querySelector('#magicItemName').value;
-//   const equipmentCategoryName = document.querySelector('#equipmentCategoryName').value;
-//   const rarityName = document.querySelector('#rarityName').value;
-//   const description = document.querySelector('#description').value;
 
-//   // Extract values for other magic item properties from the input fields
-
-//   const newMagicItem = {
-//     name,
-//     equipmentCategory: {
-//       name: equipmentCategoryName,
-//     },
-//     rarity: {
-//       name: rarityName,
-//     },
-//     description,
-//     // Assign values for other magic item properties accordingly
-//   };
-
-//   // Send a POST request to the server to save the new magic item
-//   fetch('/magic-items', {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//     body: JSON.stringify(newMagicItem),
-//   })
-//     .then(response => response.json())
-//     .then(data => {
-//       console.log('New magic item added:', data);
-//       // Update the magic item list on the page if desired
-//     })
-//     .catch(error => {
-//       console.error('Error adding magic item:', error);
-//     });
-// }
-
-// // Attach event listeners to the "Add Equipment" and "Add Magic Item" buttons
-// document.querySelector('#addEquipment').addEventListener('click', addEquipment);
-// document.querySelector('#addMagicItem').addEventListener('click', addMagicItem);
