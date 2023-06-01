@@ -48,15 +48,18 @@ const populateEquipmentList = (equipmentData) => {
     const throwRange = equipmentData.throw_range ? `Normal: ${equipmentData.throw_range.normal}, Long: ${equipmentData.throw_range.long}` : 'N/A';
     const twoHanded = equipmentData.two_handed_damage ? `${equipmentData.two_handed_damage.damage_dice}` : 'N/A';
   
+    const damage = equipmentData.damage ? equipmentData.damage.damage_dice : 'N/A';
+    const rangeNormal = equipmentData.range ? equipmentData.range.normal : 'N/A';
+  
     li.innerHTML = `
       <div class="equipment-item">
         <div class="equipment-item-header">
           <strong>Name:</strong> ${equipmentData.name}<br>
           <strong>Damage Type:</strong> ${equipmentData.damage ? equipmentData.damage.damage_type.name : 'N/A'}<br>
-          <strong>Damage:</strong> ${equipmentData.damage.damage_dice}<br>
-          <strong>Two-Handed Damage:</strong> ${twoHanded}<br>
-          <strong>Range:</strong> Normal: ${equipmentData.range.normal}<br>
-          <strong>Throw Range:</strong> ${throwRange}<br>
+          <strong>Damage:</strong> ${damage}<br>
+          ${equipmentData.two_handed_damage ? `<strong>Two-Handed Damage:</strong> ${twoHanded}<br>` : ''}
+          <strong>Range:</strong> Normal: ${rangeNormal}<br>
+          ${equipmentData.throw_range ? `<strong>Throw Range:</strong> ${throwRange}<br>` : ''}
         </div>
         <div class="equipment-item-description hidden">
           <strong>Weapon Category:</strong> ${equipmentData.category_range}<br>
@@ -80,6 +83,7 @@ const populateEquipmentList = (equipmentData) => {
     equipmentList.appendChild(li);
 };
   
+  
 // Populate the magic items list on the page
 const populateMagicItemsList = (magicItemsData) => {
     const li = document.createElement('li');
@@ -92,9 +96,9 @@ const populateMagicItemsList = (magicItemsData) => {
         <div class="magic-item-header">
           <strong>Name:</strong> ${magicItemsData.name}<br>
           <strong>Type:</strong> ${magicItemsData.equipment_category.name}<br>
+          <strong>Rarity:</strong> ${magicItemsData.rarity.name}<br>
         </div>
         <div class="magic-item-description hidden">
-          <strong>Rarity:</strong> ${magicItemsData.rarity.name}<br>
           <strong>Description:</strong> ${magicItemsData.desc.join('<br>')}<br>
         </div>
         <button class="magic-item-see-more-button">See More</button>
