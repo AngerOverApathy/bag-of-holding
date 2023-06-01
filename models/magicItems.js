@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const magicItemsSchema = new Schema({
-    ame: String,
+    name: String,
   equipmentCategory: {
     name: String,
   },

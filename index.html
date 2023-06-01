@@ -14,25 +14,24 @@
     <label for="userInput">Add items to your character inventory:</label>
     <input type="text" id="userInput" name="userInput">
     <button id="submit">Add Item</button>
-    
-    <h2>Equipment</h2>
-    <ul id="equipment"></ul>
-    <p>Name</p><!--includes categories-->
-    <p>Damage</p><!--include damage and range-->
-    <p>Properties</p>
-    
-    <h2>Magic Items</h2>
-    <ul id="magic-items"></ul>  
-    <p>Name</p><!--includes categories-->
-    <p>Damage</p><!--include damage and range-->
-    <p>Properties</p>
-    
-    <form action="/equipment" method="POST">
-        <input type="text" placeholder="equipment name" name="equipment name" />
-        <input type="text" placeholder="equipment" name="equipment" />
-        <button type="submit">Submit</button>
-      </form>
-    
+
+    <div class="container">
+        <div class="column">
+            <h2>Equipment</h2>
+            <ul id="equipment"></ul>
+            <p>Name</p><!--includes categories-->
+            <p>Damage</p><!--include damage and range-->
+            <p>Properties</p>
+        </div>
+        <div class="column">
+            <h2>Magic Items</h2>
+            <ul id="magic-items"></ul>
+            <p>Name</p><!--includes categories-->
+            <p>Damage</p><!--include damage and range-->
+            <p>Properties</p>
+        </div>
+    </div>
+
     <script src="./public/app.js"></script>
 </body>
 </html>
