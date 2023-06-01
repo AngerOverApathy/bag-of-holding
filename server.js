@@ -23,60 +23,6 @@ app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
 
-// equipment schema
-const equipmentSchema = new mongoose.Schema({
-  name: String,
-  category: String, // category_range
-  damage: {
-    damage_dice: String,
-    damage_type: {
-      name: String,
-    },
-  two_handed_damage: {
-    damage_dice: String,
-    damage_type: {
-      name: String,
-    },
-  },
-  range: [Number],
-  throwRange: {
-    normal: {
-      type: Number,
-      default: null, //default value to null for items without a throw range
-    },
-    long: {
-      type: Number,
-      default: null, //default value to null for items without a throw range
-    },
-  },
-  properties: [String],
-  equipmentCategory: String,
-  weight: Number,
-  },
-  cost: {
-    quantity: Number,
-    unit: String,
-  },
-});
-
-// Equipment model
-const Equipment = mongoose.model('Equipment', equipmentSchema);
-
-// magic items schema
-const magicItemsSchema = new mongoose.Schema({
-  name: String,
-  equipmentCategory: {
-    name: String,
-  },
-  rarity: {
-    name: String,
-  },
-  description: [String],
-});
-
-// MagicItem model
-const MagicItem = mongoose.model('MagicItem', magicItemsSchema);
-
 // Route to handle the equipment form submission
 app.post('/equipment', (req, res) => {
   // Extract form data for equipment
@@ -175,3 +121,7 @@ app.post('/magic-items', (req, res) => {
     }
   });
 });
+
+// Import and use the models
+const Equipment = require('./models/equipmentItems');
+const MagicItem = require('./models/magicItems');
