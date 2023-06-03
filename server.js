@@ -43,6 +43,7 @@ app.post('/equipment', (req, res) => {
     equipment_category,
     weight,
     two_handed_damage,
+    description
   } = req.body;
 
   // Extract the necessary properties
@@ -84,6 +85,7 @@ app.post('/equipment', (req, res) => {
           },
         }
       : null,
+    description
   });
 
   // Save the new equipment item to the database
@@ -93,7 +95,7 @@ app.post('/equipment', (req, res) => {
       res.sendStatus(500);
     } else {
       console.log('Equipment saved successfully');
-      res.redirect('/');
+      res.sendStatus(200);
     }
   });
 });
@@ -122,7 +124,7 @@ app.post('/magic-items', (req, res) => {
       res.sendStatus(500);
     } else {
       console.log('Magic item saved successfully');
-      res.redirect('/');
+      res.sendStatus(200);
     }
   });
 });

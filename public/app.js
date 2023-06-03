@@ -9,7 +9,7 @@ const endpoints = [
   'https://www.dnd5eapi.co/api/weapon-properties/{index}'
 ];
 
-// Fetch data from the API
+// fetch data from the API
 const fetchData = async (index) => {
     try {
       const convertedIndex = index.toLowerCase().split(' ').join('-'); // Convert to lowercase and replace spaces with hyphens
@@ -17,7 +17,7 @@ const fetchData = async (index) => {
       const apiResponses = await Promise.all(apiRequests); // Handle multiple asynchronous requests simultaneously
       const data = await Promise.all(apiResponses.map(response => response.json())); // Retrieve resolved JSON data from each response
   
-      // Process the data from each endpoint
+      // process the data from each endpoint
       const equipmentData = data[0];
       const magicItemsData = data[1];
       const weaponPropertiesData = data[2];
@@ -26,10 +26,12 @@ const fetchData = async (index) => {
       console.log('Magic Items Data:', magicItemsData);
       console.log('Weapon Properties Data:', weaponPropertiesData);
   
-      if (equipmentData.equipment_category) {
+      if (equipmentData.equipment_category) { // If the fetched data is normal equipment, show normal equipment and save to the database
         populateEquipmentList(equipmentData);
-      } else if (magicItemsData.index) {
+        saveEquipmentToDatabase(equipmentData); // Save equipment data to the database
+      } else if (magicItemsData.index) { // If the fetched data is magical equipment, show magical equipment and save to the database
         populateMagicItemsList(magicItemsData);
+        saveMagicItemToDatabase(magicItemsData); // Save magic item data to the database
       } else {
         console.error('Unknown data type:', data);
       }
@@ -39,8 +41,7 @@ const fetchData = async (index) => {
     }
 };
   
-
-// Populate the equipment list on the page
+//populate equipment list
 const populateEquipmentList = (equipmentData) => {
     const li = document.createElement('li');
   
@@ -51,22 +52,24 @@ const populateEquipmentList = (equipmentData) => {
     const damage = equipmentData.damage ? equipmentData.damage.damage_dice : 'N/A';
     const rangeNormal = equipmentData.range ? equipmentData.range.normal : 'N/A';
   
+    const description = equipmentData.desc ? `<strong>Description:</strong> ${equipmentData.desc}<br>` : '';
+  
     li.innerHTML = `
       <div class="equipment-item">
         <div class="equipment-item-header">
           <strong>Name:</strong> ${equipmentData.name}<br>
-          <strong>Damage Type:</strong> ${equipmentData.damage ? equipmentData.damage.damage_type.name : 'N/A'}<br>
-          <strong>Damage:</strong> ${damage}<br>
+          </div>
+          <div class="equipment-item-description hidden">
+          <strong>Damage / Type:</strong> ${damage} ${equipmentData.damage ? equipmentData.damage.damage_type.name : 'N/A'}<br>
           ${equipmentData.two_handed_damage ? `<strong>Two-Handed Damage:</strong> ${twoHanded}<br>` : ''}
           <strong>Range:</strong> Normal: ${rangeNormal}<br>
           ${equipmentData.throw_range ? `<strong>Throw Range:</strong> ${throwRange}<br>` : ''}
-        </div>
-        <div class="equipment-item-description hidden">
           <strong>Weapon Category:</strong> ${equipmentData.category_range}<br>
           <strong>Properties:</strong> ${properties}<br>
           <strong>Equipment Category:</strong> ${equipmentData.equipment_category.name}<br>
           <strong>Cost:</strong> ${equipmentData.cost.quantity} ${equipmentData.cost.unit}<br>
           <strong>Weight:</strong> ${equipmentData.weight}<br>
+          ${description}
         </div>
         <button class="equipment-see-more-button">See More</button>
       </div>
@@ -84,7 +87,8 @@ const populateEquipmentList = (equipmentData) => {
 };
   
   
-// Populate the magic items list on the page
+  
+// populate the magic items list on the page
 const populateMagicItemsList = (magicItemsData) => {
     const li = document.createElement('li');
   
@@ -95,10 +99,10 @@ const populateMagicItemsList = (magicItemsData) => {
       <div class="magic-item">
         <div class="magic-item-header">
           <strong>Name:</strong> ${magicItemsData.name}<br>
+          </div>
+          <div class="magic-item-description hidden">
           <strong>Type:</strong> ${magicItemsData.equipment_category.name}<br>
           <strong>Rarity:</strong> ${magicItemsData.rarity.name}<br>
-        </div>
-        <div class="magic-item-description hidden">
           <strong>Description:</strong> ${magicItemsData.desc.join('<br>')}<br>
         </div>
         <button class="magic-item-see-more-button">See More</button>
@@ -117,12 +121,54 @@ const populateMagicItemsList = (magicItemsData) => {
 };
     
 
-// Event listener for the submit button
-submitBtn.addEventListener('click', async function() {
-  const userInputIndex = document.getElementById('userInput').value;
-  console.log(userInputIndex);
-
-  await fetchData(userInputIndex);
+// Save equipment data to the database
+const saveEquipmentToDatabase = (equipmentData) => {
+    // Send a POST request to the server with the equipment data
+    fetch('/equipment', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(equipmentData)
+    })
+    .then(response => {
+      if (response.ok) {
+        console.log('Equipment saved to the database successfully');
+      } else {
+        console.error('Failed to save equipment to the database');
+      }
+    })
+    .catch(error => {
+      console.error('Error saving equipment:', error);
+    });
+};
+  
+// Save magic item data to the database
+const saveMagicItemToDatabase = (magicItemsData) => {
+    // Send a POST request to the server with the magic item data
+    fetch('/magic-items', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(magicItemsData)
+    })
+    .then(response => {
+      if (response.ok) {
+        console.log('Magic item saved to the database successfully');
+      } else {
+        console.error('Failed to save magic item to the database');
+      }
+    })
+    .catch(error => {
+      console.error('Error saving magic item:', error);
+    });
+};
+  
+  // Event listener for the submit button
+  submitBtn.addEventListener('click', () => {
+    const userInput = document.getElementById('userInput').value;
+    fetchData(userInput);
 });
 
 
