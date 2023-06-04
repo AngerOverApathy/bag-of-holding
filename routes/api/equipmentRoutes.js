@@ -9,7 +9,7 @@ const {
     createEquipment,
     updateEquipment,
     deleteEquipment
-  } = require('../controllers/equipmentController.js');
+  } = require('../../controllers/equipmentController.js');
   
   // /api/Equipments
   router

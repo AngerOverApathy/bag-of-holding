@@ -1,6 +1,6 @@
 const router = require('express').Router()
-const htmlRoutes = require('./htmlRoutes')
-const equipmentRoutes = require('./equipmentRoutes')
+const htmlRoutes = require('./api/htmlRoutes')
+const equipmentRoutes = require('./api/equipmentRoutes')
 
 router.use('/', htmlRoutes)
 router.use('/equipment', equipmentRoutes)

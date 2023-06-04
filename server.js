@@ -7,9 +7,11 @@ const url = 'mongodb://127.0.0.1:27017/loot-log';
 const cors = require('cors');
 const path = require('path');
 
+const db = mongoose.connection 
+
 //Routes
-const htmlRoutes = require('./routes/htmlRoutes');
-const equipmentRoutes = require('./api/equipmentRoutes');
+const htmlRoutes = require('./routes/api/htmlRoutes');
+const equipmentRoutes = require('./routes/api/equipmentRoutes');
 
 // Import models
 const Equipment = require('./models/equipmentItems');
@@ -22,10 +24,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors())
 app.use(express.static('public'));
-app.use('/api', htmlRoutes);
-app.use('/api/Equipments', equipmentRoutes);
-
-const db = mongoose.connection 
+app.use('/', htmlRoutes);
+app.use('/api/equipment', equipmentRoutes);
 
 mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {

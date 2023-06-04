@@ -1,4 +1,4 @@
-const { Equipment } = require('../models');
+const Equipment = require('../models/equipmentItems');
 
 // implement the controller methods that handle the business logic for equipment operations. 
 //Each method corresponds to a specific API endpoint and performs the necessary operations using the Equipment model.
