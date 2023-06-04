@@ -13,6 +13,12 @@ const htmlRoutes = require('./routes/htmlRoutes');
 const Equipment = require('./models/equipmentItems');
 const MagicItem = require('./models/magicItems');
 
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(cors())
+app.use(express.static('public'));
+app.use('/', htmlRoutes);
+
 const db = mongoose.connection 
 
 mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -26,9 +32,4 @@ mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
     console.error('Connection error:', err);
 });
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.json());
-app.use(cors())
-app.use(express.static('public'));
-app.use('/', htmlRoutes);
 
