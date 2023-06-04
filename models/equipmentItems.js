@@ -34,6 +34,7 @@ const equipmentSchema = new Schema({
       quantity: Number,
       unit: String,
     },
+    desc: []
 });
 
 const Equipment = mongoose.model('Equipment', equipmentSchema);

@@ -86,8 +86,6 @@ const populateEquipmentList = (equipmentData) => {
     equipmentList.appendChild(li);
 };
   
-  
-  
 // populate the magic items list on the page
 const populateMagicItemsList = (magicItemsData) => {
     const li = document.createElement('li');
@@ -120,58 +118,13 @@ const populateMagicItemsList = (magicItemsData) => {
     magicItemsList.appendChild(li);
 };
     
+// event listener for the submit button
+submitBtn.addEventListener('click', async function() {
+  const userInputIndex = document.getElementById('userInput').value;
+  console.log(userInputIndex);
 
-// Save equipment data to the database
-const saveEquipmentToDatabase = (equipmentData) => {
-    // Send a POST request to the server with the equipment data
-    fetch('/equipment', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(equipmentData)
-    })
-    .then(response => {
-      if (response.ok) {
-        console.log('Equipment saved to the database successfully');
-      } else {
-        console.error('Failed to save equipment to the database');
-      }
-    })
-    .catch(error => {
-      console.error('Error saving equipment:', error);
-    });
-};
-  
-// Save magic item data to the database
-const saveMagicItemToDatabase = (magicItemsData) => {
-    // Send a POST request to the server with the magic item data
-    fetch('/magic-items', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(magicItemsData)
-    })
-    .then(response => {
-      if (response.ok) {
-        console.log('Magic item saved to the database successfully');
-      } else {
-        console.error('Failed to save magic item to the database');
-      }
-    })
-    .catch(error => {
-      console.error('Error saving magic item:', error);
-    });
-};
-  
-  // Event listener for the submit button
-  submitBtn.addEventListener('click', () => {
-    const userInput = document.getElementById('userInput').value;
-    fetchData(userInput);
+  await fetchData(userInputIndex);
 });
-
-
 
 
 
