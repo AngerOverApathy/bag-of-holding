@@ -117,34 +117,6 @@ const populateMagicItemsList = (magicItemsData) => {
   
     magicItemsList.appendChild(li);
 };
-    
-const saveEquipmentToDatabase = (equipmentData) => {
-  // Create a new equipment instance based on the Equipment model
-  const equipment = new Equipment({
-    name: equipmentData.name,
-    damage: equipmentData.damage ? equipmentData.damage.damage_dice : 'N/A',
-    damageType: equipmentData.damage ? equipmentData.damage.damage_type.name : 'N/A',
-    properties: equipmentData.properties ? equipmentData.properties.map(property => property.name) : [],
-    range: {
-      normal: equipmentData.range ? equipmentData.range[0] : 'N/A',
-      long: equipmentData.range ? equipmentData.range[1] : 'N/A'
-    },
-    throwRange: equipmentData.throwRange ? {
-      normal: equipmentData.throwRange.normal,
-      long: equipmentData.throwRange.long
-    } : {},
-    description: equipmentData.desc || ''
-  });
-
-  // Save the equipment instance to the database
-  equipment.save()
-    .then(() => {
-      console.log('Equipment data saved to the database');
-    })
-    .catch((error) => {
-      console.error('Error saving equipment data:', error);
-    });
-};
 
 // event listener for the submit button
 submitBtn.addEventListener('click', async function(event) {
@@ -154,9 +126,4 @@ submitBtn.addEventListener('click', async function(event) {
 
   await fetchData(userInputIndex);
 });
-
-
-
-
-
 
