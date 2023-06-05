@@ -7,7 +7,7 @@ const {
   createMagicItem,
   updateMagicItem,
   deleteMagicItem
-} = require('../../controllers/magicItemController.js');
+} = require('../../controllers/magicController.js');
 
 // Define the API endpoints for accessing magic item-related data
 router
