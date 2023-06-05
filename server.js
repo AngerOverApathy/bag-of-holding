@@ -8,10 +8,12 @@ const cors = require('cors');
 const dotenv = require('dotenv')
 
 //models
-const Equipment = require('./models/equipmentItems')
+const Equipment = require('./models/equipmentItems.js')
+const MagicItem = require('./models/magicItems.js')
 
 //routes
 const equipmentRoutes = require('./routes/api/equipmentroutes');
+const magicRoutes = require('./routes/api/magicRoutes.js')
 const htmlRoutes = require('./routes/api/htmlroutes');
 
 let db; 
@@ -34,5 +36,6 @@ mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
 });
 
 app.use('/', htmlRoutes);
-app.use('/api/equipment', equipmentRoutes);
+app.use('/', equipmentRoutes);
+app.use('/', magicRoutes)
 
