@@ -7,7 +7,14 @@ const url = 'mongodb://127.0.0.1:27017/loot-log';
 const cors = require('cors');
 const dotenv = require('dotenv')
 
-const db = mongoose.connection 
+//models
+const Equipment = require('./models/equipmentItems')
+
+//routes
+const equipmentRoutes = require('./routes/api/equipmentroutes');
+const htmlRoutes = require('./routes/api/htmlroutes');
+
+let db; 
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
@@ -19,24 +26,13 @@ mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
     console.log('Database connected:', url);
     app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`);
+      db = mongoose.connection.db
     });
   })
   .catch(err => {
     console.error('Connection error:', err);
 });
 
-app.get('/', async (req,res)=>{
-  db.collection('items').find().toArray()
-  .then(data=>{
-    db.collection('items').countDocuments()
-    .then(allItems => {
-      res.render('index.html')
-    })
-  })
-
-  .catch(err => console.error(err))
-})
-
-
-
+app.use('/', htmlRoutes);
+app.use('/api/equipment', equipmentRoutes);
 

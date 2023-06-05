@@ -21,6 +21,15 @@
     cursor: pointer;
 }
 
+.section-content {
+    display: none;
+}
+  
+  .section.open .section-content {
+    display: block;
+}
+  
+
 @media screen and (max-width: 600px) {
     .container {
       flex-direction: column;

@@ -118,6 +118,42 @@ const populateMagicItemsList = (magicItemsData) => {
     magicItemsList.appendChild(li);
 };
 
+//save equipment to db
+const saveEquipmentToDatabase = async equipmentData => {
+  try {
+    const equipment = {
+      name: equipmentData.name,
+      category: equipmentData.category,
+      damage: equipmentData.damage,
+      two_handed_damage: equipmentData.two_handed_damage,
+      range: equipmentData.range,
+      throwRange: equipmentData.throw_range,
+      properties: equipmentData.properties.map(property => property.name),
+      equipmentCategory: equipmentData.equipment_category.name,
+      weight: equipmentData.weight,
+      cost: equipmentData.cost,
+      desc: equipmentData.desc
+    };
+
+    const response = await fetch('/api/equipment', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(equipment)
+    });
+
+    if (response.ok) {
+      console.log('Equipment saved successfully');
+    } else {
+      console.error('Failed to save equipment');
+    }
+  } catch (error) {
+    console.error('Error:', error);
+  }
+};
+
+
 // event listener for the submit button
 submitBtn.addEventListener('click', async function(event) {
   event.preventDefault();
@@ -126,4 +162,11 @@ submitBtn.addEventListener('click', async function(event) {
 
   await fetchData(userInputIndex);
 });
+
+//toggle create form
+function toggleForm() {
+  var section = document.querySelector('.section');
+  section.classList.toggle('open');
+}
+
 
