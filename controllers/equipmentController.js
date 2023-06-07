@@ -1,14 +1,15 @@
 const Equipment = require('../models/equipmentItems');
 
-// implement the controller methods that handle the business logic for equipment operations. 
-//Each method corresponds to a specific API endpoint and performs the necessary operations using the Equipment model.
-
 const equipmentController = {
-  // Get all equipment
+  // Render all equipment as a list
   getAllEquipment(req, res) {
     Equipment.find({})
-      .then(equipment => res.json(equipment))
-      .catch(error => res.status(500).json({ error: 'Failed to retrieve equipment' }));
+      .then(equipment => {
+        res.render('equipmentList', { equipment });
+      })
+      .catch(error => {
+        res.status(500).json({ error: 'Failed to retrieve equipment' });
+      });
   },
 
   // Get a specific equipment by ID
@@ -21,14 +22,20 @@ const equipmentController = {
           res.json(equipment);
         }
       })
-      .catch(error => res.status(500).json({ error: 'Failed to retrieve equipment' }));
+      .catch(error => {
+        res.status(500).json({ error: 'Failed to retrieve equipment' });
+      });
   },
 
   // Create a new equipment
   createEquipment({ body }, res) {
     Equipment.create(body)
-      .then(savedEquipment => res.status(201).json(savedEquipment))
-      .catch(error => res.status(500).json({ error: 'Failed to create equipment' }));
+      .then(savedEquipment => {
+        res.status(201).json(savedEquipment);
+      })
+      .catch(error => {
+        res.status(500).json({ error: 'Failed to create equipment' });
+      });
   },
 
   // Update an existing equipment
@@ -41,7 +48,9 @@ const equipmentController = {
           res.json(updatedEquipment);
         }
       })
-      .catch(error => res.status(500).json({ error: 'Failed to update equipment' }));
+      .catch(error => {
+        res.status(500).json({ error: 'Failed to update equipment' });
+      });
   },
 
   // Delete an existing equipment
@@ -54,7 +63,9 @@ const equipmentController = {
           res.json({ message: 'Equipment deleted successfully' });
         }
       })
-      .catch(error => res.status(500).json({ error: 'Failed to delete equipment' }));
+      .catch(error => {
+        res.status(500).json({ error: 'Failed to delete equipment' });
+      });
   }
 };
 

@@ -17,9 +17,9 @@ router
 
 //magicItems/:id
 router
-    .route('/:id')
-    .get(getMagicItemById)
-    .put(updateMagicItem)
-    .delete(deleteMagicItem);
+.route('/:id')
+.get(getMagicItemById)
+.put(updateMagicItem)
+.delete(deleteMagicItem);
 
 module.exports = router;

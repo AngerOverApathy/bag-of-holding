@@ -28,6 +28,8 @@ app.use(express.json());
 app.use(cors());
 app.use(express.static('public'));
 
+app.set('view engine', 'ejs');
+
 mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log('Connected to MongoDB Atlas');
@@ -37,16 +39,13 @@ mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
   })
   .catch(err => {
     console.error('Connection error:', err);
-  });
+});
 
 // Equipment routes
 app.use('/', equipmentRoutes);
-
 // MagicItem routes
 app.use('/', magicRoutes);
-
 // HTML routes
 app.use('/', htmlRoutes);
-
 // Index routes
 app.use('/', indexRoutes);

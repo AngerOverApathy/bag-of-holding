@@ -155,24 +155,24 @@ const saveEquipmentToDatabase = async equipmentData => {
 
 // Save magic item data to the database
 const saveMagicItemToDatabase = (magicItemsData) => {
-  // Send a POST request to the server with the magic item data
-  fetch('/magic-items', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(magicItemsData)
-  })
-  .then(response => {
-    if (response.ok) {
-      console.log('Magic item saved to the database successfully');
-    } else {
-      console.error('Failed to save magic item to the database');
-    }
-  })
-  .catch(error => {
-    console.error('Error saving magic item:', error);
-  });
+    // Send a POST request to the server with the magic item data
+    fetch('/magic-items', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(magicItemsData)
+    })
+    .then(response => {
+      if (response.ok) {
+        console.log('Magic item saved to the database successfully');
+      } else {
+        console.error('Failed to save magic item to the database');
+      }
+    })
+    .catch(error => {
+      console.error('Error saving magic item:', error);
+    });
 };
 
 // event listener for the submit button
