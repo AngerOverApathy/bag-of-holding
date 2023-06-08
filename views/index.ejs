@@ -68,6 +68,12 @@
                     </div>
                 </div>
                 <button class="see-more-button">See More</button>
+
+                <form action="/equipment" method="POST" class="delete-form">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button type="submit" class="delete-button">Delete</button>
+                  </form>
+                  
             </li>
             <% }) %>
         </ul>
