@@ -7,7 +7,6 @@ const mongoose = require('mongoose');
 const PORT = process.env.PORT || 5050;
 const mongoURI = process.env.MONGODB_URI; // MongoDB Atlas connection string
 const cors = require('cors');
-const dotenv = require('dotenv');
 
 // Models
 const Equipment = require('./models/equipmentItems.js');

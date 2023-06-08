@@ -27,18 +27,16 @@ const equipmentController = {
       });
   },
 
-  // Create a new equipment
-  createEquipment({ body, res }) {
-    Equipment.create(body)
-      .then(() => {
-        res.redirect('/');
-      })
-      .catch(error => {
-        res.status(500).json({ error: 'Failed to create equipment' });
-      });
-  },
-
-
+// Create a new equipment
+createEquipment(req, res) {
+  Equipment.create(req.body)
+    .then(() => {
+      res.redirect('/');
+    })
+    .catch(error => {
+      res.status(500).json({ error: 'Failed to create equipment' });
+    });
+},
   // Update an existing equipment
   updateEquipment({ params, body }, res) {
     Equipment.findOneAndUpdate({ _id: params.id }, body, { new: true })
@@ -55,9 +53,10 @@ const equipmentController = {
   },
 
   deleteEquipment(req, res) {
-    const equipmentId = req.params.id;
-    Equipment.findOneAndDelete({ _id: equipmentId })
+    console.log('Equipment ID:', req.params.id);
+    Equipment.findByIdAndDelete({ _id: req.params.id })
       .then(deletedEquipment => {
+        console.log('Deleted Equipment:', deletedEquipment);
         if (!deletedEquipment) {
           res.status(404).json({ error: 'Equipment not found' });
         } else {
@@ -65,10 +64,11 @@ const equipmentController = {
         }
       })
       .catch(error => {
+        console.error('Failed to delete equipment:', error);
         res.status(500).json({ error: 'Failed to delete equipment' });
       });
-  }
-  
+  }  
+ 
 };
 
 module.exports = equipmentController;

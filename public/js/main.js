@@ -1,43 +1,52 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const seeMoreButtons = document.querySelectorAll('.see-more-button');
+const seeMoreButtons = document.querySelectorAll('.see-more-button');
+// Iterate over each button
+seeMoreButtons.forEach(button => {
 
-  seeMoreButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      const descriptionSection = button.parentNode.querySelector('.equipment-item-description');
-      descriptionSection.classList.toggle('hidden');
-      button.textContent = descriptionSection.classList.contains('hidden') ? 'See More' : 'See Less';
-    });
+  button.addEventListener('click', () => {
+    // Find the parent item
+    const item = button.parentNode;
+
+    const descriptionSection = item.querySelector('.item-description');
+    descriptionSection.classList.toggle('hidden');
+    // Update the button text based on the visibility state
+    button.textContent = descriptionSection.classList.contains('hidden') ? 'See More' : 'See Less';
   });
-  
-  deleteForms.forEach(form => {
-    form.addEventListener('submit', (event) => {
-      event.preventDefault();
-      const confirmation = confirm('Are you sure you want to delete this equipment?');
-      if (confirmation) {
-        const url = form.getAttribute('action');
-        const method = form.querySelector('input[name="_method"]').value;
-        fetch(url, {
-          method: method
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const deleteButtons = document.querySelectorAll('.delete-button');
+
+  deleteButtons.forEach((button) => {
+    button.addEventListener('click', (event) => {
+      const equipmentId = event.target.dataset.equipmentId;
+
+      if (equipmentId) {
+        fetch(`/api/Equipment/${equipmentId}`, {
+          method: 'DELETE',
         })
-          .then(response => response.json())
-          .then(data => {
-            // Handle success or display error message
-            console.log(data);
+          .then((response) => {
+            if (response.ok) {
+              // Refresh the page after successful deletion
+              location.reload();
+            } else {
+              console.error('Failed to delete equipment');
+            }
           })
-          .catch(error => {
-            console.error(error);
+          .catch((error) => {
+            console.error('Failed to delete equipment:', error);
           });
       }
     });
   });
-
 });
+
 
 function toggleForm() {
   let form = document.getElementById("equipmentForm");
   if (form.style.display === "none") {
-      form.style.display = "block";
+    form.style.display = "block";
   } else {
-      form.style.display = "none";
+    form.style.display = "none";
   }
 }
+
