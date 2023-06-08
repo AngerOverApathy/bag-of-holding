@@ -28,15 +28,16 @@ const equipmentController = {
   },
 
   // Create a new equipment
-  createEquipment({ body }, res) {
+  createEquipment({ body, res }) {
     Equipment.create(body)
-      .then(savedEquipment => {
-        res.status(201).json(savedEquipment);
+      .then(() => {
+        res.redirect('/');
       })
       .catch(error => {
         res.status(500).json({ error: 'Failed to create equipment' });
       });
   },
+
 
   // Update an existing equipment
   updateEquipment({ params, body }, res) {
@@ -54,8 +55,9 @@ const equipmentController = {
   },
 
   // Delete an existing equipment
-  deleteEquipment({ params }, res) {
-    Equipment.findOneAndDelete({ _id: params.id })
+  deleteEquipment(req, res) {
+    const equipmentId = req.params.id;
+    Equipment.findByIdAndDelete(equipmentId)
       .then(deletedEquipment => {
         if (!deletedEquipment) {
           res.status(404).json({ error: 'Equipment not found' });

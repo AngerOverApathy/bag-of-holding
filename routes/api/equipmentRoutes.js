@@ -17,7 +17,7 @@ const {
     .get(getAllEquipment)
     .post(createEquipment);
   
-  // /api/Equipments/:id
+  // /api/Equipment/:id
   router
     .route('/:id')
     .get(getEquipmentById)
