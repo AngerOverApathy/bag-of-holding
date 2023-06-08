@@ -186,8 +186,6 @@ submitBtn.addEventListener('click', async function(event) {
 
 //toggle create form
 function toggleForm() {
-  var section = document.querySelector('.section');
+  let section = document.querySelector('.section');
   section.classList.toggle('open');
 }
-
-

@@ -5,7 +5,7 @@ const equipmentController = {
   getAllEquipment(req, res) {
     Equipment.find({})
       .then(equipment => {
-        res.render('equipmentList', { equipment });
+        res.render('index', { equipment });
       })
       .catch(error => {
         res.status(500).json({ error: 'Failed to retrieve equipment' });

@@ -11,8 +11,7 @@
     display: none;
 }
   
-.equipment-see-more-button,
-.magic-item-see-more-button {
+.see-more-button {
     background-color: #f0f0f0;
     color: #333;
     border: none;

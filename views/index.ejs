@@ -36,32 +36,21 @@
                             <% } %>
                             <strong>Weapon Category:</strong> <%= equipmentData.category_range %><br>
                             <strong>Properties:</strong> <%= equipmentData.properties ? equipmentData.properties.join(', ') : 'N/A' %><br>
-                            <strong>Equipment Category:</strong> <%= equipmentData.equipment_category.name %><br>
+                            <strong>Equipment Category:</strong> <%= equipmentData.equipment_category ? equipmentData.equipment_category.name : 'N/A' %><br>
                             <strong>Cost:</strong> <%= equipmentData.cost.quantity %> <%= equipmentData.cost.unit %><br>
                             <strong>Weight:</strong> <%= equipmentData.weight %><br>
                             <% if (equipmentData.desc) { %>
                             <strong>Description:</strong> <%= equipmentData.desc.join('<br>') %><br>
                             <% } %>
                         </div>
-                        <button class="equipment-see-more-button">See More</button>
+                        <button class="see-more-button">See More</button>
+                        <button class="delete-button" data-id="<%= equipmentData._id %>">Delete Item</button> <!-- Add delete button with data-id attribute -->
                     </div>
                 </li>
                 <% }) %>
             </ul>
         </div>
-        <div class="column">
-            <h2>Magic Items</h2>
-            <ul id="magic-items"></ul>
-        </div>
-    </div>
 
-    <div class="section">
-        <div class="section-header" onclick="toggleForm()">Click here to create a non-magical item</div>
-        <form id="equipmentForm" action="/" method="POST" class="section-content">
-        <!-- Form inputs -->
-        </form>
-    </div>
-
-    <script src="./js/app.js"></script>
+        <script src="/js/main.js"></script>
 </body>
 </html>

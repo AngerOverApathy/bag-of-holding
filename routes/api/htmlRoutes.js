@@ -2,12 +2,16 @@ const path = require('path');
 const router = require('express').Router();
 
 router.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../../public/index.html'));
+    res.render('index');
 });
+  
+// router.get('/js/app.js', (req, res) => {
+//     res.sendFile(path.join(__dirname, '../../public/js/app.js'));
+// });  
 
-router.get('/js/app.js', (req, res) => {
-  res.sendFile(path.join(__dirname, '../../public/app.js'));
-});
+router.get('/js/main.js', (req, res) => {
+  res.sendFile(path.join(__dirname, '../../public/js/main.js'));
+});  
 
 router.get('/css', (req, res) => {
   res.sendFile(path.join(__dirname, '../../public/style.css'));
