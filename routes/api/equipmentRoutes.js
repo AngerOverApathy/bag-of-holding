@@ -1,27 +1,8 @@
-const router = require('express').Router()
+const router = require('express').Router();
+const equipmentController = require('../../controllers/equipmentController.js');
 
-//define the API endpoints for accessing equipment-related data.
-//The router handles HTTP requests to these endpoints and maps them to the corresponding controller methods.
+router.get('/', equipmentController.getAllEquipment);
+router.post('/', equipmentController.createEquipment);
+// router.delete('/:id', equipmentController.deleteEquipment);
 
-const {
-    getAllEquipment,
-    getEquipmentById,
-    createEquipment,
-    updateEquipment,
-    deleteEquipment
-  } = require('../../controllers/equipmentController.js');
-  
-  // /api/Equipments
-  router
-    .route('/')
-    .get(getAllEquipment)
-    .post(createEquipment);
-  
-  // /api/Equipment/:id
-  router
-    .route('/:id')
-    .get(getEquipmentById)
-    .put(updateEquipment)
-    .delete(deleteEquipment);
-  
-  module.exports = router;
+module.exports = router;

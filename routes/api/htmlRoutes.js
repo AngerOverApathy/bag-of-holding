@@ -4,10 +4,6 @@ const router = require('express').Router();
 router.get('/', (req, res) => {
     res.render('index');
 });
-  
-// router.get('/js/app.js', (req, res) => {
-//     res.sendFile(path.join(__dirname, '../../public/js/app.js'));
-// });  
 
 router.get('/js/main.js', (req, res) => {
   res.sendFile(path.join(__dirname, '../../public/js/main.js'));

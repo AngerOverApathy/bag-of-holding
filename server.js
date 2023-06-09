@@ -10,22 +10,20 @@ const cors = require('cors');
 
 // Models
 const Equipment = require('./models/equipmentItems.js');
-const MagicItem = require('./models/magicItems.js');
 
 // Controllers
 const equipmentController = require('./controllers/equipmentController.js');
-const magicItemController = require('./controllers/magicController.js');
 
 // Route files
 const htmlRoutes = require('./routes/api/htmlRoutes.js');
-const magicRoutes = require('./routes/api/magicRoutes.js');
 const equipmentRoutes = require('./routes/api/equipmentRoutes.js');
-const indexRoutes = require('./routes/index.js');
+const indexRoutes = require('./routes/router.js');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
 app.use(express.static('public'));
+app.use('/equipment', equipmentRoutes)
 
 app.set('view engine', 'ejs');
 
@@ -40,11 +38,4 @@ mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
     console.error('Connection error:', err);
 });
 
-// Equipment routes
-app.use('/', equipmentRoutes);
-// MagicItem routes
-app.use('/', magicRoutes);
-// HTML routes
-app.use('/', htmlRoutes);
-// Index routes
-app.use('/', indexRoutes);
+
