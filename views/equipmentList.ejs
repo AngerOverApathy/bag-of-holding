@@ -58,8 +58,8 @@
               <strong>Cost:</strong> <%= equipmentData.cost_quantity %> <%= equipmentData.cost_unit %><br>
               <% } %>
   
-              <% if (equipmentData.weight !== '') { %>
-              <strong>Weight:</strong> <%= equipmentData.weight %><br>
+              <% if (equipmentData.weight && equipmentData.weight !== '') { %>
+                <strong>Weight:</strong> <%= equipmentData.weight %><br>
               <% } %>
   
               <% if (equipmentData.desc && equipmentData.desc.length > 0 && equipmentData.desc[0] !== '') { %>
@@ -68,6 +68,18 @@
             </div>
           </div>
         </li>
+
+
+        <!-- Update Equipment Form -->
+      <form id="updateForm-<%= equipmentData._id %>" class="update-form" style="display: none;">
+        <label for="update-name-<%= equipmentData._id %>">Name:</label>
+        <input type="text" id="update-name-<%= equipmentData._id %>" name="name" value="<%= equipmentData.name %>"><br><br>
+        <!-- Add other fields you want to update -->
+        <input type="submit" value="Save Edit">
+      </form>
+      <button class="update-button" onclick="handleUpdateButtonClick('<%= equipmentData._id %>')">Update</button>
+
+
         <button class="delete-button" onclick="deleteEquipment('<%= equipmentData._id %>')">Delete</button>
         <% }) %>
       </ul>

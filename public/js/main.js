@@ -1,4 +1,5 @@
 const seeMoreButtons = document.querySelectorAll('.see-more-button');
+const updateButton = document.querySelector('.update-button')
 const deleteButton = document.querySelector('.delete-button')
 
 // Iterate over each button
@@ -39,3 +40,44 @@ function deleteEquipment(id) {
     });
   }
 }
+
+function handleUpdateFormSubmit(event, equipmentId) {
+  event.preventDefault();
+
+  const formData = new FormData(event.target);
+  const formDataObject = Object.fromEntries(formData.entries());
+  const updateUrl = `/equipment/${equipmentId}`;
+
+  fetch(updateUrl, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(formDataObject),
+  })
+    .then(response => response.json())
+    .then(updatedEquipment => {
+      console.log('Equipment updated successfully:', updatedEquipment);
+      // Update the UI with the updated equipment data here
+
+      // Reload the page to reflect the changes
+      location.reload();
+    })
+    .catch(error => {
+      console.error('Failed to update equipment:', error);
+      // Handle the error and show an error message to the user
+    });
+}
+
+// Function to handle the update button click event
+function handleUpdateButtonClick(equipmentId) {
+  // Find the corresponding form element
+  const updateForm = document.getElementById(`updateForm-${equipmentId}`);
+
+  // Attach the form submission handler
+  updateForm.addEventListener('submit', event => handleUpdateFormSubmit(event, equipmentId));
+
+  // Show the update form
+  updateForm.style.display = 'block';
+}
+
