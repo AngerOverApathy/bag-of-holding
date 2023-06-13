@@ -72,49 +72,50 @@
         <!--update equipment form-->
         <form id="updateForm-<%= equipmentData._id %>" class="update-form" style="display: none;">
           <label for="update-name-<%= equipmentData._id %>">Name:</label>
-          <input type="text" id="update-name-<%= equipmentData._id %>" name="name" value="<%= equipmentData.name %>"><br><br>
+          <input type="text" id="update-name-<%= equipmentData._id %>" name="name" value="<%= equipmentData.name %>" placeholder="Name"><br><br>
           
           <label for="category">Category:</label>
-          <input type="text" id="category" name="category"><br><br>
-        
+          <input type="text" id="category" name="category" placeholder="Category"><br><br>
+          
           <label for="damage_dice">Damage Dice:</label>
-          <input type="text" id="damage_dice" name="damage_dice"><br><br>
-        
+          <input type="text" id="damage_dice" name="damage_dice" placeholder="Damage Dice"><br><br>
+          
           <label for="damage_type_name">Damage Type:</label>
-          <input type="text" id="damage_type_name" name="damage_type_name"><br><br>
-        
+          <input type="text" id="damage_type_name" name="damage_type_name" placeholder="Damage Type"><br><br>
+          
           <label for="two_handed_damage_dice">Two-Handed Damage Dice:</label>
-          <input type="text" id="two_handed_damage_dice" name="two_handed_damage_dice"><br><br>
-        
+          <input type="text" id="two_handed_damage_dice" name="two_handed_damage_dice" placeholder="Two-Handed Damage Dice"><br><br>
+          
           <label for="two_handed_damage_type_name">Two-Handed Damage Type:</label>
-          <input type="text" id="two_handed_damage_type_name" name="two_handed_damage_type_name"><br><br>
-        
+          <input type="text" id="two_handed_damage_type_name" name="two_handed_damage_type_name" placeholder="Two-Handed Damage Type"><br><br>
+          
           <label for="range_normal">Range (Normal):</label>
-          <input type="number" id="range_normal" name="range_normal"><br><br>
-        
+          <input type="number" id="range_normal" name="range_normal" placeholder="Range (Normal)"><br><br>
+          
           <label for="range_long">Range (Long):</label>
-          <input type="number" id="range_long" name="range_long"><br><br>
-        
+          <input type="number" id="range_long" name="range_long" placeholder="Range (Long)"><br><br>
+          
           <label for="throw_range_normal">Throw Range (Normal):</label>
-          <input type="number" id="throw_range_normal" name="throw_range_normal"><br><br>
-        
+          <input type="number" id="throw_range_normal" name="throw_range_normal" placeholder="Throw Range (Normal)"><br><br>
+          
           <label for="throw_range_long">Throw Range (Long):</label>
-          <input type="number" id="throw_range_long" name="throw_range_long"><br><br>
-        
+          <input type="number" id="throw_range_long" name="throw_range_long" placeholder="Throw Range (Long)"><br><br>
+          
           <label for="properties">Properties:</label>
-          <input type="text" id="properties" name="properties"><br><br>
-        
+          <input type="text" id="properties" name="properties" placeholder="Properties"><br><br>
+          
           <label for="equipmentCategory">Equipment Category:</label>
-          <input type="text" id="equipmentCategory" name="equipmentCategory"><br><br>
-        
+          <input type="text" id="equipmentCategory" name="equipmentCategory" placeholder="Equipment Category"><br><br>
+          
           <label for="weight">Weight:</label>
-          <input type="text" id="weight" name="weight"><br><br>
-        
+          <input type="text" id="weight" name="weight" placeholder="Weight"><br><br>
+          
           <label for="cost_quantity">Cost Quantity:</label>
-          <input type="text" id="cost_quantity" name="cost_quantity"><br><br>
-        
+          <input type="text" id="cost_quantity" name="cost_quantity" placeholder="Cost Quantity"><br><br>
+          
           <label for="cost_unit">Cost Unit:</label>
-          <input type="text" id="cost_unit" name="cost_unit"><br><br>
+          <input type="text" id="cost_unit" name="cost_unit" placeholder="Cost Unit"><br><br>
+          
         
           <label for="desc">Description:</label>
           <input type="text" id="desc" name="desc"><br><br>
@@ -133,53 +134,53 @@
     <form id="equipmentForm" action="/equipment" method="POST" class="section-content" style="display: none;">
       <!-- Equipment Fields -->
       <label for="name">Name:</label>
-      <input type="text" id="name" name="name"><br><br>
+      <input type="text" id="name" name="name" placeholder="Name"><br><br>
   
       <label for="category">Category:</label>
-      <input type="text" id="category" name="category"><br><br>
+      <input type="text" id="category" name="category" placeholder="Category"><br><br>
   
       <label for="damage_dice">Damage Dice:</label>
-      <input type="text" id="damage_dice" name="damage_dice"><br><br>
-  
+      <input type="text" id="damage_dice" name="damage_dice" placeholder="Damage Dice"><br><br>
+
       <label for="damage_type_name">Damage Type:</label>
-      <input type="text" id="damage_type_name" name="damage_type_name"><br><br>
-  
+      <input type="text" id="damage_type_name" name="damage_type_name" placeholder="Damage Type"><br><br>
+
       <label for="two_handed_damage_dice">Two-Handed Damage Dice:</label>
-      <input type="text" id="two_handed_damage_dice" name="two_handed_damage_dice"><br><br>
-  
+      <input type="text" id="two_handed_damage_dice" name="two_handed_damage_dice" placeholder="Two-Handed Damage Dice"><br><br>
+
       <label for="two_handed_damage_type_name">Two-Handed Damage Type:</label>
-      <input type="text" id="two_handed_damage_type_name" name="two_handed_damage_type_name"><br><br>
-  
+      <input type="text" id="two_handed_damage_type_name" name="two_handed_damage_type_name" placeholder="Two-Handed Damage Type"><br><br>
+
       <label for="range_normal">Range (Normal):</label>
-      <input type="number" id="range_normal" name="range_normal"><br><br>
-  
+      <input type="number" id="range_normal" name="range_normal" placeholder="Range (Normal)"><br><br>
+
       <label for="range_long">Range (Long):</label>
-      <input type="number" id="range_long" name="range_long"><br><br>
-  
+      <input type="number" id="range_long" name="range_long" placeholder="Range (Long)"><br><br>
+
       <label for="throw_range_normal">Throw Range (Normal):</label>
-      <input type="number" id="throw_range_normal" name="throw_range_normal"><br><br>
-  
+      <input type="number" id="throw_range_normal" name="throw_range_normal" placeholder="Throw Range (Normal)"><br><br>
+
       <label for="throw_range_long">Throw Range (Long):</label>
-      <input type="number" id="throw_range_long" name="throw_range_long"><br><br>
-  
+      <input type="number" id="throw_range_long" name="throw_range_long" placeholder="Throw Range (Long)"><br><br>
+
       <label for="properties">Properties:</label>
-      <input type="text" id="properties" name="properties"><br><br>
-  
+      <input type="text" id="properties" name="properties" placeholder="Properties"><br><br>
+
       <label for="equipmentCategory">Equipment Category:</label>
-      <input type="text" id="equipmentCategory" name="equipmentCategory"><br><br>
-  
+      <input type="text" id="equipmentCategory" name="equipmentCategory" placeholder="Equipment Category"><br><br>
+
       <label for="weight">Weight:</label>
-      <input type="text" id="weight" name="weight"><br><br>
-  
+      <input type="number" id="weight" name="weight" placeholder="Weight"><br><br>
+
       <label for="cost_quantity">Cost Quantity:</label>
-      <input type="text" id="cost_quantity" name="cost_quantity"><br><br>
-  
+      <input type="number" id="cost_quantity" name="cost_quantity" placeholder="Cost"><br><br>
+
       <label for="cost_unit">Cost Unit:</label>
-      <input type="text" id="cost_unit" name="cost_unit"><br><br>
-  
+      <input type="text" id="cost_unit" name="cost_unit" placeholder="Cost Unit"><br><br>
+
       <label for="desc">Description:</label>
-      <input type="text" id="desc" name="desc"><br><br>
-  
+      <input type="text" id="desc" name="desc" placeholder="Description"><br><br>
+        
       <input type="submit" value="Create">
     </form>
   </div>
