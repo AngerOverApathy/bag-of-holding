@@ -8,13 +8,16 @@ PORT = process.env.PORT || 5050;
 
 // Models
 const Equipment = require('./models/equipmentItems.js');
+const MagicItem = require('./models/magicItems.js')
 
 // Controllers
 const equipmentController = require('./controllers/equipmentController.js');
+const magicItemController = require('./controllers/magicItemController.js')
 
 // Route files
 const htmlRoutes = require('./routes/api/htmlRoutes.js');
 const equipmentRoutes = require('./routes/api/equipmentRoutes.js');
+const magicRoutes = require('./routes/api/magicRoutes.js')
 
 // database.js
 const mongoose = require('./config/database.js');
@@ -26,6 +29,7 @@ app.use(cors());
 app.use(express.static('public'));
 app.use('/', htmlRoutes);
 app.use('/equipment', equipmentRoutes)
+app.use('/equipment', magicRoutes)
 
 app.set('view engine', 'ejs');
 
