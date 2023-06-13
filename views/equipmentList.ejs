@@ -16,18 +16,14 @@
       <h2>Equipment</h2>
       <ul id="equipment">
         <% equipment.forEach(function(equipmentData) { %>
-        <li>
+        <li data-equipment-id="<%= equipmentData._id %>">
           <div class="equipment-item">
             <div class="equipment-item-header">
               <strong>Name:</strong> <%= equipmentData.name %><br>
             </div>
 
             <button class="see-more-button">See More</button>
-            <!-- Delete Button -->
-            <form action="/equipment/<%= equipmentData._id %>" method="POST">
-            <input type="hidden" name="_method" value="DELETE">
-            <button class="delete-button" data-equipment-id="<%= equipmentData._id %>">Delete</button>
-            </form>
+
             <div class="item-description hidden">
               <!-- Display Equipment Details -->
               <% if (equipmentData.damage_dice && equipmentData.damage_type_name && equipmentData.damage_dice !== '' && equipmentData.damage_type_name !== '') { %>
@@ -72,6 +68,7 @@
             </div>
           </div>
         </li>
+        <button class="delete-button" onclick="deleteEquipment('<%= equipmentData._id %>')">Delete</button>
         <% }) %>
       </ul>
     </div>

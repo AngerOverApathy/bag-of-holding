@@ -22,23 +22,18 @@ const equipmentController = {
         res.status(500).json({ error: 'Failed to create equipment' });
       });
   },
-  
-  // Delete an equipment by ID
+
+  // Delete an equipment
   deleteEquipment(req, res) {
     const { id } = req.params;
     Equipment.findByIdAndDelete(id)
-      .then(deletedEquipment => {
-        if (!deletedEquipment) {
-          res.status(404).json({ error: 'Equipment not found' });
-        } else {
-          res.redirect('/equipment');
-        }
+      .then(() => {
+        res.redirect('/equipment');
       })
       .catch(error => {
-        console.error('Failed to delete equipment:', error);
         res.status(500).json({ error: 'Failed to delete equipment' });
       });
-  },
+  }
 };
 
 module.exports = equipmentController;
