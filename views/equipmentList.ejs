@@ -26,6 +26,10 @@
 
             <div class="item-description hidden">
               <!-- Display Equipment Details -->
+              <% if (equipmentData.category !== '') { %>
+              <strong>Weapon Category:</strong> <%= equipmentData.category %><br>
+              <% } %>
+
               <% if (equipmentData.damage_dice && equipmentData.damage_type_name && equipmentData.damage_dice !== '' && equipmentData.damage_type_name !== '') { %>
               <strong>Damage / Type:</strong> <%= equipmentData.damage_dice %> <%= equipmentData.damage_type_name %><br>
               <% } %>
@@ -40,10 +44,6 @@
   
               <% if (equipmentData.throw_range_normal && equipmentData.throw_range_long && equipmentData.throw_range_normal !== '' && equipmentData.throw_range_long !== '') { %>
               <strong>Throw Range:</strong> Normal: <%= equipmentData.throw_range_normal %>, Long: <%= equipmentData.throw_range_long %><br>
-              <% } %>
-  
-              <% if (equipmentData.category !== '') { %>
-              <strong>Weapon Category:</strong> <%= equipmentData.category %><br>
               <% } %>
   
               <% if (equipmentData.properties && equipmentData.properties.length > 0 && equipmentData.properties[0] !== '') { %>
@@ -73,7 +73,51 @@
         <form id="updateForm-<%= equipmentData._id %>" class="update-form" style="display: none;">
           <label for="update-name-<%= equipmentData._id %>">Name:</label>
           <input type="text" id="update-name-<%= equipmentData._id %>" name="name" value="<%= equipmentData.name %>"><br><br>
-          <!-- Add other fields you want to update -->
+          
+          <label for="category">Category:</label>
+          <input type="text" id="category" name="category"><br><br>
+        
+          <label for="damage_dice">Damage Dice:</label>
+          <input type="text" id="damage_dice" name="damage_dice"><br><br>
+        
+          <label for="damage_type_name">Damage Type:</label>
+          <input type="text" id="damage_type_name" name="damage_type_name"><br><br>
+        
+          <label for="two_handed_damage_dice">Two-Handed Damage Dice:</label>
+          <input type="text" id="two_handed_damage_dice" name="two_handed_damage_dice"><br><br>
+        
+          <label for="two_handed_damage_type_name">Two-Handed Damage Type:</label>
+          <input type="text" id="two_handed_damage_type_name" name="two_handed_damage_type_name"><br><br>
+        
+          <label for="range_normal">Range (Normal):</label>
+          <input type="number" id="range_normal" name="range_normal"><br><br>
+        
+          <label for="range_long">Range (Long):</label>
+          <input type="number" id="range_long" name="range_long"><br><br>
+        
+          <label for="throw_range_normal">Throw Range (Normal):</label>
+          <input type="number" id="throw_range_normal" name="throw_range_normal"><br><br>
+        
+          <label for="throw_range_long">Throw Range (Long):</label>
+          <input type="number" id="throw_range_long" name="throw_range_long"><br><br>
+        
+          <label for="properties">Properties:</label>
+          <input type="text" id="properties" name="properties"><br><br>
+        
+          <label for="equipmentCategory">Equipment Category:</label>
+          <input type="text" id="equipmentCategory" name="equipmentCategory"><br><br>
+        
+          <label for="weight">Weight:</label>
+          <input type="text" id="weight" name="weight"><br><br>
+        
+          <label for="cost_quantity">Cost Quantity:</label>
+          <input type="text" id="cost_quantity" name="cost_quantity"><br><br>
+        
+          <label for="cost_unit">Cost Unit:</label>
+          <input type="text" id="cost_unit" name="cost_unit"><br><br>
+        
+          <label for="desc">Description:</label>
+          <input type="text" id="desc" name="desc"><br><br>
           <input type="submit" id="saveButton-<%= equipmentData._id %>" value="Save Edit" style="display: none;">
         </form>
         <button id="updateButton-<%= equipmentData._id %>" class="update-button" onclick="handleUpdateButtonClick('<%= equipmentData._id %>')">Update</button>
