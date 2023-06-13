@@ -14,6 +14,7 @@ seeMoreButtons.forEach(button => {
   });
 });
 
+//show creation form
 function toggleForm() {
   let form = document.getElementById("equipmentForm");
   if (form.style.display === "none") {
@@ -23,6 +24,45 @@ function toggleForm() {
   }
 }
 
+//update
+function handleUpdateFormSubmit(event, equipmentId) {
+  event.preventDefault(); // Prevent the default form submission behavior
+
+  const formData = new FormData(event.target); // Get the form data
+  const formDataObject = Object.fromEntries(formData.entries()); // Convert form data to a plain object
+  const updateUrl = `/equipment/${equipmentId}`; // Construct the update URL
+
+  //update the equipment
+  fetch(updateUrl, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json', // Set the request content type to JSON
+    },
+    body: JSON.stringify(formDataObject), // Convert the form data object to JSON
+  })
+    .then(response => response.json()) // Parse the response as JSON
+    .then(updatedEquipment => {
+      console.log('Equipment updated successfully:', updatedEquipment);
+      // Update the UI with the updated equipment data here
+      location.reload(); // Reload the page to reflect the changes
+    })
+    .catch(error => {
+      console.error('Failed to update equipment:', error);
+      // Handle the error and show an error message to the user
+    });
+}
+
+// Function to handle the update button click event
+function handleUpdateButtonClick(equipmentId) {
+  // Find the corresponding form element
+  const updateForm = document.getElementById(`updateForm-${equipmentId}`);
+  // Attach the form submission handler
+  updateForm.addEventListener('submit', event => handleUpdateFormSubmit(event, equipmentId));
+  // Show the update form
+  updateForm.style.display = 'block';
+}
+
+//delete
 function deleteEquipment(id) {
   const confirmed = confirm("Are you sure you want to delete this equipment?");
   if (confirmed) {
@@ -40,44 +80,3 @@ function deleteEquipment(id) {
     });
   }
 }
-
-function handleUpdateFormSubmit(event, equipmentId) {
-  event.preventDefault();
-
-  const formData = new FormData(event.target);
-  const formDataObject = Object.fromEntries(formData.entries());
-  const updateUrl = `/equipment/${equipmentId}`;
-
-  fetch(updateUrl, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(formDataObject),
-  })
-    .then(response => response.json())
-    .then(updatedEquipment => {
-      console.log('Equipment updated successfully:', updatedEquipment);
-      // Update the UI with the updated equipment data here
-
-      // Reload the page to reflect the changes
-      location.reload();
-    })
-    .catch(error => {
-      console.error('Failed to update equipment:', error);
-      // Handle the error and show an error message to the user
-    });
-}
-
-// Function to handle the update button click event
-function handleUpdateButtonClick(equipmentId) {
-  // Find the corresponding form element
-  const updateForm = document.getElementById(`updateForm-${equipmentId}`);
-
-  // Attach the form submission handler
-  updateForm.addEventListener('submit', event => handleUpdateFormSubmit(event, equipmentId));
-
-  // Show the update form
-  updateForm.style.display = 'block';
-}
-

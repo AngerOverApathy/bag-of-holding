@@ -24,38 +24,24 @@ const equipmentController = {
   },
 
   // Update an equipment
-  // updateEquipment(req, res) {
-  //   const { id } = req.params;
-  //   const updatedEquipment = req.body;
+  updateEquipment(req, res) {
+    const { id } = req.params;
+    const updatedEquipment = req.body;
 
-  //   Equipment.findByIdAndUpdate(id, updatedEquipment)
-  //     .then(() => {
-  //       res.redirect('/equipment');
-  //     })
-  //     .catch(error => {
-  //       res.status(500).json({ error: 'Failed to update equipment' });
-  //     });
-  //   },
-
-  // Update an equipment
-updateEquipment(req, res) {
-  const { id } = req.params;
-  const updatedEquipment = req.body;
-
-  Equipment.findByIdAndUpdate(id, updatedEquipment)
-    .then(() => {
-      Equipment.findById(id)
-        .then(updated => {
-          res.status(200).json(updated); // Send the updated equipment as a JSON response
-        })
-        .catch(error => {
-          res.status(500).json({ error: 'Failed to fetch updated equipment' });
-        });
-    })
-    .catch(error => {
-      res.status(500).json({ error: 'Failed to update equipment' });
-    });
-},
+    Equipment.findByIdAndUpdate(id, updatedEquipment)
+      .then(() => {
+        Equipment.findById(id)
+          .then(updated => {
+            res.status(200).json(updated); // Send the updated equipment as a JSON response
+          })
+          .catch(error => {
+            res.status(500).json({ error: 'Failed to fetch updated equipment' });
+          });
+      })
+      .catch(error => {
+        res.status(500).json({ error: 'Failed to update equipment' });
+      });
+  },
 
   // Delete an equipment
   deleteEquipment(req, res) {
