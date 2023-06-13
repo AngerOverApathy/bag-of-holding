@@ -31,6 +31,7 @@ function handleUpdateFormSubmit(event, equipmentId) {
   const formData = new FormData(event.target); // Get the form data
   const formDataObject = Object.fromEntries(formData.entries()); // Convert form data to a plain object
   const updateUrl = `/equipment/${equipmentId}`; // Construct the update URL
+  
 
   //update the equipment
   fetch(updateUrl, {
@@ -50,6 +51,12 @@ function handleUpdateFormSubmit(event, equipmentId) {
       console.error('Failed to update equipment:', error);
       // Handle the error and show an error message to the user
     });
+
+    // Toggle the visibility of the buttons
+    const updateButton = document.getElementById(`updateButton-${equipmentId}`);
+    const saveButton = document.getElementById(`saveButton-${equipmentId}`);
+    updateButton.style.display = 'block';
+    saveButton.style.display = 'none';
 }
 
 // Function to handle the update button click event
@@ -60,6 +67,12 @@ function handleUpdateButtonClick(equipmentId) {
   updateForm.addEventListener('submit', event => handleUpdateFormSubmit(event, equipmentId));
   // Show the update form
   updateForm.style.display = 'block';
+
+  // Toggle the visibility of the buttons
+  const updateButton = document.getElementById(`updateButton-${equipmentId}`);
+  const saveButton = document.getElementById(`saveButton-${equipmentId}`);
+  updateButton.style.display = 'none';
+  saveButton.style.display = 'block';
 }
 
 //delete
