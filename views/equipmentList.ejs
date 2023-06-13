@@ -21,6 +21,7 @@
             <div class="equipment-item-header">
               <strong>Name:</strong> <%= equipmentData.name %><br>
             </div>
+
             <button class="see-more-button">See More</button>
             <!-- Delete Button -->
             <form action="/equipment/<%= equipmentData._id %>" method="POST">
@@ -37,11 +38,11 @@
               <strong>Two-Handed Damage:</strong> <%= equipmentData.two_handed_damage_dice %><br>
               <% } %>
   
-              <% if (equipmentData.range_normal !== '') { %>
+              <% if (equipmentData.range_normal && equipmentData.range_normal !== '') { %>
               <strong>Range:</strong> <%= equipmentData.range_normal %><br>
               <% } %>
   
-              <% if (equipmentData.throw_range_normal !== '' && equipmentData.throw_range_long !== '') { %>
+              <% if (equipmentData.throw_range_normal && equipmentData.throw_range_long && equipmentData.throw_range_normal !== '' && equipmentData.throw_range_long !== '') { %>
               <strong>Throw Range:</strong> Normal: <%= equipmentData.throw_range_normal %>, Long: <%= equipmentData.throw_range_long %><br>
               <% } %>
   
