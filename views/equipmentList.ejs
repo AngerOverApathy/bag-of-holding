@@ -122,7 +122,7 @@
           <input type="text" id="equipmentCategory-<%= equipmentData._id %>" name="equipmentCategory" value="<%= equipmentData.equipmentCategory %>" placeholder="Equipment Category"><br><br>
         
           <label for="weight-<%= equipmentData._id %>">Weight:</label>
-          <input type="text" id="weight-<%= equipmentData._id %>" name="weight" value="<%= equipmentData.weight %>" placeholder="Weight"><br><br>
+          <input type="number" id="weight-<%= equipmentData._id %>" name="weight" value="<%= equipmentData.weight %>" placeholder="Weight"><br><br>
         
           <label for="cost_quantity-<%= equipmentData._id %>">Cost Quantity:</label>
           <input type="text" id="cost_quantity-<%= equipmentData._id %>" name="cost_quantity" value="<%= equipmentData.cost_quantity %>" placeholder="Cost Quantity"><br><br>
@@ -145,7 +145,7 @@
   
 <!-- Create Equipment Form -->
 <div class="section">
-    <div class="section-header" onclick="toggleForm()">Click here to create a non-magical item</div>
+    <div class="section-header" onclick="toggleForm()">Can't find an item? Create one here!</div>
     <form id="equipmentForm" action="/equipment" method="POST" class="section-content" style="display: none;">
       <!-- Equipment Fields -->
       <label for="name">Name:</label>
