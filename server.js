@@ -17,7 +17,7 @@ const fetchedEquipmentController = require('./controllers/fetchedEquipmentContro
 // Route files
 const htmlRoutes = require('./routes/api/htmlRoutes.js');
 const equipmentRoutes = require('./routes/api/equipmentRoutes.js');
-const fetchedEquipmentRoute = require('./routes/api/fetchedEquipmentRoute.js');
+const fetchedEquipmentRoutes = require('./routes/api/fetchedEquipmentRoutes.js');
 
 // database.js
 const mongoose = require('./config/database.js');
@@ -29,8 +29,7 @@ app.use(cors());
 app.use(express.static('public'));
 app.use('/', htmlRoutes);
 app.use('/equipment', equipmentRoutes)
-
-app.post('/api/saveFetchedEquipment', fetchedEquipmentController.saveFetchedEquipment);
+app.use('/api/saveFetchedEquipment', fetchedEquipmentRoutes);
 
 app.set('view engine', 'ejs');
 
