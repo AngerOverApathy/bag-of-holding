@@ -1,11 +1,13 @@
 const Equipment = require('../models/equipmentItems');
+const FetchedEquipment = require('../models/fetchedEquipment')
 
 const equipmentController = {
   // Render all equipment as a list
   async getAllEquipment(req, res) {
     try {
       const equipment = await Equipment.find({});
-      res.render('equipmentList', { equipment });
+      const fetchedEquipment = await FetchedEquipment.find({});
+      res.render('equipmentList', { equipment, fetchedEquipment });
     } catch (error) {
       res.status(500).json({ error: 'Failed to retrieve equipment' });
     }

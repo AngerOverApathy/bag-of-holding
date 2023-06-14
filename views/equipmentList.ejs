@@ -81,6 +81,9 @@
           </div>
         </li>
 
+        <!--fetched item-->
+        
+
         <!--update equipment form-->
         <form id="updateForm-<%= equipmentData._id %>" class="update-form" style="display: none;">
           <label for="update-name-<%= equipmentData._id %>">Name:</label>
@@ -92,8 +95,8 @@
           <label for="rarity-<%= equipmentData._id %>">Rarity:</label>
           <input type="text" id="rarity-<%= equipmentData._id %>" name="rarity" value="<%= equipmentData.rarity %>" placeholder="Rarity"><br><br>
         
-          <label for="requiresAttunement">Requires Attunement:</label>
-          <input type="checkbox" id="requiresAttunement" name="requiresAttunement" <% if (equipmentData.requiresAttunement) { %> checked <% } %> value="true"><br><br>        
+          <label for="requiresAttunement-<%= equipmentData._id %>">Requires Attunement:</label>
+          <input type="checkbox" id="requiresAttunement-<%= equipmentData._id %>" name="requiresAttunement" <% if (equipmentData.requiresAttunement) { %> checked <% } %> value="true"><br><br>        
         
           <label for="damage_dice-<%= equipmentData._id %>">Damage Dice:</label>
           <input type="text" id="damage_dice-<%= equipmentData._id %>" name="damage_dice" value="<%= equipmentData.damage_dice %>" placeholder="Damage Dice"><br><br>
