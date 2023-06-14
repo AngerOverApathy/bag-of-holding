@@ -4,6 +4,8 @@ const Schema = mongoose.Schema
 const equipmentSchema = new Schema({
   name: String,
   category: String,
+  rarity: String,
+  requiresAttunement: Boolean,
   damage_dice: String,
   damage_type_name: String,
   two_handed_damage_dice: String,

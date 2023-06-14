@@ -30,6 +30,14 @@
               <strong>Weapon Category:</strong> <%= equipmentData.category %><br>
               <% } %>
 
+              <% if (equipmentData.rarity && equipmentData.rarity !== '') { %>
+              <strong>Rarity:</strong> <%= equipmentData.rarity %><br>
+              <% } %>
+              
+              <% if (equipmentData.requiresAttunement !== undefined) { %>
+              <strong>Requires Attunement:</strong> <%= equipmentData.requiresAttunement ? 'Yes' : 'No' %><br>
+              <% } %>
+
               <% if (equipmentData.damage_dice && equipmentData.damage_type_name && equipmentData.damage_dice !== '' && equipmentData.damage_type_name !== '') { %>
               <strong>Damage / Type:</strong> <%= equipmentData.damage_dice %> <%= equipmentData.damage_type_name %><br>
               <% } %>
@@ -74,53 +82,60 @@
           <label for="update-name-<%= equipmentData._id %>">Name:</label>
           <input type="text" id="update-name-<%= equipmentData._id %>" name="name" value="<%= equipmentData.name %>" placeholder="Name"><br><br>
           
-          <label for="category">Category:</label>
-          <input type="text" id="category" name="category" placeholder="Category"><br><br>
-          
-          <label for="damage_dice">Damage Dice:</label>
-          <input type="text" id="damage_dice" name="damage_dice" placeholder="Damage Dice"><br><br>
-          
-          <label for="damage_type_name">Damage Type:</label>
-          <input type="text" id="damage_type_name" name="damage_type_name" placeholder="Damage Type"><br><br>
-          
-          <label for="two_handed_damage_dice">Two-Handed Damage Dice:</label>
-          <input type="text" id="two_handed_damage_dice" name="two_handed_damage_dice" placeholder="Two-Handed Damage Dice"><br><br>
-          
-          <label for="two_handed_damage_type_name">Two-Handed Damage Type:</label>
-          <input type="text" id="two_handed_damage_type_name" name="two_handed_damage_type_name" placeholder="Two-Handed Damage Type"><br><br>
-          
-          <label for="range_normal">Range (Normal):</label>
-          <input type="number" id="range_normal" name="range_normal" placeholder="Range (Normal)"><br><br>
-          
-          <label for="range_long">Range (Long):</label>
-          <input type="number" id="range_long" name="range_long" placeholder="Range (Long)"><br><br>
-          
-          <label for="throw_range_normal">Throw Range (Normal):</label>
-          <input type="number" id="throw_range_normal" name="throw_range_normal" placeholder="Throw Range (Normal)"><br><br>
-          
-          <label for="throw_range_long">Throw Range (Long):</label>
-          <input type="number" id="throw_range_long" name="throw_range_long" placeholder="Throw Range (Long)"><br><br>
-          
-          <label for="properties">Properties:</label>
-          <input type="text" id="properties" name="properties" placeholder="Properties"><br><br>
-          
-          <label for="equipmentCategory">Equipment Category:</label>
-          <input type="text" id="equipmentCategory" name="equipmentCategory" placeholder="Equipment Category"><br><br>
-          
-          <label for="weight">Weight:</label>
-          <input type="text" id="weight" name="weight" placeholder="Weight"><br><br>
-          
-          <label for="cost_quantity">Cost Quantity:</label>
-          <input type="text" id="cost_quantity" name="cost_quantity" placeholder="Cost Quantity"><br><br>
-          
-          <label for="cost_unit">Cost Unit:</label>
-          <input type="text" id="cost_unit" name="cost_unit" placeholder="Cost Unit"><br><br>
-          
+          <label for="category-<%= equipmentData._id %>">Category:</label>
+          <input type="text" id="category-<%= equipmentData._id %>" name="category" value="<%= equipmentData.category %>" placeholder="Category"><br><br>
         
-          <label for="desc">Description:</label>
-          <input type="text" id="desc" name="desc"><br><br>
+          <label for="rarity-<%= equipmentData._id %>">Rarity:</label>
+          <input type="text" id="rarity-<%= equipmentData._id %>" name="rarity" value="<%= equipmentData.rarity %>" placeholder="Rarity"><br><br>
+        
+          <label for="requiresAttunement-<%= equipmentData._id %>">Requires Attunement:</label>
+          <input type="checkbox" id="requiresAttunement-<%= equipmentData._id %>" name="requiresAttunement" <% if (equipmentData.requiresAttunement) { %> checked="checked" <% } %>><br><br>          
+        
+          <label for="damage_dice-<%= equipmentData._id %>">Damage Dice:</label>
+          <input type="text" id="damage_dice-<%= equipmentData._id %>" name="damage_dice" value="<%= equipmentData.damage_dice %>" placeholder="Damage Dice"><br><br>
+        
+          <label for="damage_type_name-<%= equipmentData._id %>">Damage Type:</label>
+          <input type="text" id="damage_type_name-<%= equipmentData._id %>" name="damage_type_name" value="<%= equipmentData.damage_type_name %>" placeholder="Damage Type"><br><br>
+        
+          <label for="two_handed_damage_dice-<%= equipmentData._id %>">Two-Handed Damage Dice:</label>
+          <input type="text" id="two_handed_damage_dice-<%= equipmentData._id %>" name="two_handed_damage_dice" value="<%= equipmentData.two_handed_damage_dice %>" placeholder="Two-Handed Damage Dice"><br><br>
+        
+          <label for="two_handed_damage_type_name-<%= equipmentData._id %>">Two-Handed Damage Type:</label>
+          <input type="text" id="two_handed_damage_type_name-<%= equipmentData._id %>" name="two_handed_damage_type_name" value="<%= equipmentData.two_handed_damage_type_name %>" placeholder="Two-Handed Damage Type"><br><br>
+        
+          <label for="range_normal-<%= equipmentData._id %>">Range (Normal):</label>
+          <input type="number" id="range_normal-<%= equipmentData._id %>" name="range_normal" value="<%= equipmentData.range_normal %>" placeholder="Range (Normal)"><br><br>
+        
+          <label for="range_long-<%= equipmentData._id %>">Range (Long):</label>
+          <input type="number" id="range_long-<%= equipmentData._id %>" name="range_long" value="<%= equipmentData.range_long %>" placeholder="Range (Long)"><br><br>
+        
+          <label for="throw_range_normal-<%= equipmentData._id %>">Throw Range (Normal):</label>
+          <input type="number" id="throw_range_normal-<%= equipmentData._id %>" name="throw_range_normal" value="<%= equipmentData.throw_range_normal %>" placeholder="Throw Range (Normal)"><br><br>
+        
+          <label for="throw_range_long-<%= equipmentData._id %>">Throw Range (Long):</label>
+          <input type="number" id="throw_range_long-<%= equipmentData._id %>" name="throw_range_long" value="<%= equipmentData.throw_range_long %>" placeholder="Throw Range (Long)"><br><br>
+        
+          <label for="properties-<%= equipmentData._id %>">Properties:</label>
+          <input type="text" id="properties-<%= equipmentData._id %>" name="properties" value="<%= equipmentData.properties %>" placeholder="Properties"><br><br>
+        
+          <label for="equipmentCategory-<%= equipmentData._id %>">Equipment Category:</label>
+          <input type="text" id="equipmentCategory-<%= equipmentData._id %>" name="equipmentCategory" value="<%= equipmentData.equipmentCategory %>" placeholder="Equipment Category"><br><br>
+        
+          <label for="weight-<%= equipmentData._id %>">Weight:</label>
+          <input type="text" id="weight-<%= equipmentData._id %>" name="weight" value="<%= equipmentData.weight %>" placeholder="Weight"><br><br>
+        
+          <label for="cost_quantity-<%= equipmentData._id %>">Cost Quantity:</label>
+          <input type="text" id="cost_quantity-<%= equipmentData._id %>" name="cost_quantity" value="<%= equipmentData.cost_quantity %>" placeholder="Cost Quantity"><br><br>
+        
+          <label for="cost_unit-<%= equipmentData._id %>">Cost Unit:</label>
+          <input type="text" id="cost_unit-<%= equipmentData._id %>" name="cost_unit" value="<%= equipmentData.cost_unit %>" placeholder="Cost Unit"><br><br>
+        
+          <label for="desc-<%= equipmentData._id %>">Description:</label>
+          <input type="text" id="desc-<%= equipmentData._id %>" name="desc" value="<%= equipmentData.desc %>" placeholder="Description"><br><br>
+        
           <input type="submit" id="saveButton-<%= equipmentData._id %>" value="Save Edit" style="display: none;">
         </form>
+
         <button id="updateButton-<%= equipmentData._id %>" class="update-button" onclick="handleUpdateButtonClick('<%= equipmentData._id %>')">Update</button>
         <button class="delete-button" onclick="deleteEquipment('<%= equipmentData._id %>')">Delete</button>
         <% }) %>
@@ -138,6 +153,12 @@
   
       <label for="category">Category:</label>
       <input type="text" id="category" name="category" placeholder="Category"><br><br>
+
+      <label for="rarity">Rarity:</label>
+      <input type="text" id="rarity" name="rarity" placeholder="Rarity"><br><br>
+  
+      <label for="requiresAttunement">Requires Attunement:</label>
+      <input type="checkbox" id="requiresAttunement" name="requiresAttunement"><br><br>
   
       <label for="damage_dice">Damage Dice:</label>
       <input type="text" id="damage_dice" name="damage_dice" placeholder="Damage Dice"><br><br>

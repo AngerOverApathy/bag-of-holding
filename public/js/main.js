@@ -32,6 +32,8 @@ function handleUpdateFormSubmit(event, equipmentId) {
   const formDataObject = Object.fromEntries(formData.entries()); // Convert form data to a plain object
   const updateUrl = `/equipment/${equipmentId}`; // Construct the update URL
   
+    // Handle the boolean value separately
+    formDataObject.requiresAttunement = event.target.elements[`requiresAttunement-${equipmentId}`].checked;
 
   //update the equipment
   fetch(updateUrl, {
@@ -45,11 +47,11 @@ function handleUpdateFormSubmit(event, equipmentId) {
     .then(updatedEquipment => {
       console.log('Equipment updated successfully:', updatedEquipment);
       // Update the UI with the updated equipment data here
-      location.reload(); // Reload the page to reflect the changes
+       // Reload the page to reflect the changes
     })
     .catch(error => {
       console.error('Failed to update equipment:', error);
-      // Handle the error and show an error message to the user
+      location.reload();// Handle the error and show an error message to the user
     });
 
     // Toggle the visibility of the buttons
