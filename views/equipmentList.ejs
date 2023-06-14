@@ -18,16 +18,16 @@
 <div class="container">
     <div class="column">
       <h2>Equipment</h2>
+      
       <ul id="equipment">
+
         <% equipment.forEach(function(equipmentData) { %>
         <li data-equipment-id="<%= equipmentData._id %>">
           <div class="equipment-item">
             <div class="equipment-item-header">
               <strong>Name:</strong> <%= equipmentData.name %><br>
             </div>
-
             <button class="see-more-button">See More</button>
-
             <div class="item-description hidden">
               <!-- Display Equipment Details -->
               <% if (equipmentData.category !== '') { %>
@@ -80,8 +80,6 @@
             </div>
           </div>
         </li>
-
-        <!--fetched item-->
         
 
         <!--update equipment form-->
@@ -149,6 +147,53 @@
       </ul>
     </div>
   </div>  
+
+
+  <% fetchedEquipment.forEach(function(fetchedEquipmentData) { %>
+    <!-- Render fetched equipment -->
+    <li data-equipment-id="<%= fetchedEquipmentData._id %>">
+      <div class="equipment-item">
+        <div class="equipment-item-header">
+          <strong>Name:</strong> <%= fetchedEquipmentData.name %><br>
+          <strong>Damage / Type:</strong>
+          <% if (fetchedEquipmentData.damage && fetchedEquipmentData.damage.damage_type && fetchedEquipmentData.damage.damage_type.name) { %>
+            <%= fetchedEquipmentData.damage.damage_type.name %><br>
+          <% } %>
+          <% if (fetchedEquipmentData.two_handed_damage && fetchedEquipmentData.two_handed_damage.damage_dice) { %>
+            <strong>Two-Handed Damage:</strong> <%= fetchedEquipmentData.two_handed_damage.damage_dice %><br>
+          <% } %>
+          <% if (fetchedEquipmentData.range && fetchedEquipmentData.range.normal) { %>
+            <strong>Range:</strong> Normal: <%= fetchedEquipmentData.range.normal %><br>
+          <% } %>
+          <% if (fetchedEquipmentData.throwRange && fetchedEquipmentData.throwRange.normal) { %>
+            <strong>Throw Range:</strong> <%= fetchedEquipmentData.throwRange.normal %><br>
+          <% } %>
+          <% if (fetchedEquipmentData.category) { %>
+            <strong>Weapon Category:</strong> <%= fetchedEquipmentData.category %><br>
+          <% } %>
+          <% if (fetchedEquipmentData.properties && fetchedEquipmentData.properties.length > 0) { %>
+            <strong>Properties:</strong> <%= fetchedEquipmentData.properties.join(', ') %><br>
+          <% } %>
+          <% if (fetchedEquipmentData.equipment_category && fetchedEquipmentData.equipment_category.name) { %>
+            <strong>Equipment Category:</strong> <%= fetchedEquipmentData.equipment_category.name %><br>
+          <% } %>
+          <% if (fetchedEquipmentData.cost) { %>
+            <strong>Cost:</strong> <%= fetchedEquipmentData.cost.quantity %> <%= fetchedEquipmentData.cost.unit %><br>
+          <% } %>
+          <% if (fetchedEquipmentData.weight) { %>
+            <strong>Weight:</strong> <%= fetchedEquipmentData.weight %><br>
+          <% } %>
+          <% if (fetchedEquipmentData.desc && fetchedEquipmentData.desc.length > 0) { %>
+            <% fetchedEquipmentData.desc.forEach(function(desc) { %>
+              <%= desc %><br>
+            <% }) %>
+          <% } %>
+        </div>
+      </div>
+    </li>
+  <% }) %>  
+
+
   
 <!-- Create Equipment Form -->
 <div class="section">
