@@ -93,8 +93,3 @@ submitBtn.addEventListener('click', async function(event) {
   await fetchData(userInputIndex);
 });
 
-//toggle create form
-function toggleForm() {
-  let section = document.querySelector('.section');
-  section.classList.toggle('open');
-}

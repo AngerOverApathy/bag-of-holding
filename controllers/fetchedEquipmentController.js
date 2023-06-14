@@ -14,6 +14,16 @@ const fetchedEquipmentController = {
         res.status(500).json({ error: 'Failed to save equipment' });
       });
   },
+
+  async getFetchedEquipment(req, res) {
+    try {
+      const fetchedEquipment = await FetchedEquipment.find();
+      res.render('fetchedEquipment', { fetchedEquipment });
+    } catch (error) {
+      console.error('Failed to fetch equipment:', error);
+      res.status(500).json({ error: 'Failed to fetch equipment' });
+    }
+  }
 };
 
 module.exports = fetchedEquipmentController;

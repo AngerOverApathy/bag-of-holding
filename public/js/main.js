@@ -1,6 +1,4 @@
 const seeMoreButtons = document.querySelectorAll('.see-more-button');
-const updateButton = document.querySelector('.update-button')
-const deleteButton = document.querySelector('.delete-button')
 
 // Iterate over each button
 seeMoreButtons.forEach(button => {
@@ -17,11 +15,7 @@ seeMoreButtons.forEach(button => {
 //show creation form
 function toggleForm() {
   let form = document.getElementById("equipmentForm");
-  if (form.style.display === "none") {
-    form.style.display = "block";
-  } else {
-    form.style.display = "none";
-  }
+  form.classList.toggle("hidden");
 }
 
 //update
@@ -31,11 +25,11 @@ function handleUpdateFormSubmit(event, equipmentId) {
   const formData = new FormData(event.target); // Get the form data
   const formDataObject = Object.fromEntries(formData.entries()); // Convert form data to a plain object
   const updateUrl = `/equipment/${equipmentId}`; // Construct the update URL
-  
-    // Handle the boolean value separately
-    formDataObject.requiresAttunement = event.target.elements[`requiresAttunement-${equipmentId}`].checked;
 
-  //update the equipment
+  // Handle the boolean value separately
+  formDataObject.requiresAttunement = event.target.elements[`requiresAttunement-${equipmentId}`].checked;
+
+  // Update the equipment
   fetch(updateUrl, {
     method: 'PUT',
     headers: {
@@ -47,18 +41,19 @@ function handleUpdateFormSubmit(event, equipmentId) {
     .then(updatedEquipment => {
       console.log('Equipment updated successfully:', updatedEquipment);
       // Update the UI with the updated equipment data here
-       // Reload the page to reflect the changes
+      // Reload the page to reflect the changes
+      location.reload();
     })
     .catch(error => {
       console.error('Failed to update equipment:', error);
-      location.reload();// Handle the error and show an error message to the user
+      location.reload(); // Handle the error and show an error message to the user
     });
 
-    // Toggle the visibility of the buttons
-    const updateButton = document.getElementById(`updateButton-${equipmentId}`);
-    const saveButton = document.getElementById(`saveButton-${equipmentId}`);
-    updateButton.style.display = 'block';
-    saveButton.style.display = 'none';
+  // Toggle the visibility of the buttons
+  const updateButton = document.getElementById(`updateButton-${equipmentId}`);
+  const saveButton = document.getElementById(`saveButton-${equipmentId}`);
+  updateButton.style.display = 'block';
+  saveButton.style.display = 'none';
 }
 
 // Function to handle the update button click event
@@ -85,13 +80,13 @@ function deleteEquipment(id) {
     fetch(`/equipment/${id}`, {
       method: 'DELETE'
     })
-    .then(() => {
-      // Reload the page to reflect the updated equipment list
-      location.reload();
-    })
-    .catch(error => {
-      console.error('Failed to delete equipment:', error);
-      // Handle error as needed
-    });
+      .then(() => {
+        // Reload the page to reflect the updated equipment list
+        location.reload();
+      })
+      .catch(error => {
+        console.error('Failed to delete equipment:', error);
+        // Handle error as needed
+      });
   }
 }
