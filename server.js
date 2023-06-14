@@ -8,13 +8,16 @@ PORT = process.env.PORT || 5050;
 
 // Models
 const Equipment = require('./models/equipmentItems.js');
+const FetchedEquipment = require('./models/fetchedEquipment.js');
 
 // Controllers
 const equipmentController = require('./controllers/equipmentController.js');
+const fetchedEquipmentController = require('./controllers/fetchedEquipmentController.js')
 
 // Route files
 const htmlRoutes = require('./routes/api/htmlRoutes.js');
 const equipmentRoutes = require('./routes/api/equipmentRoutes.js');
+const fetchedEquipmentRoute = require('./routes/api/fetchedEquipmentRoute.js');
 
 // database.js
 const mongoose = require('./config/database.js');
@@ -26,6 +29,8 @@ app.use(cors());
 app.use(express.static('public'));
 app.use('/', htmlRoutes);
 app.use('/equipment', equipmentRoutes)
+
+app.post('/api/saveFetchedEquipment', fetchedEquipmentController.saveFetchedEquipment);
 
 app.set('view engine', 'ejs');
 
