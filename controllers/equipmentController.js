@@ -14,6 +14,8 @@ const equipmentController = {
 
   // Create a new equipment
   createEquipment(req, res) {
+    req.body.requiresAttunement = Boolean(req.body.requiresAttunement);
+
     Equipment.create(req.body)
       .then(() => {
         res.redirect('/equipment');
