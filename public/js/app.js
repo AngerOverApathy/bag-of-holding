@@ -90,6 +90,6 @@ submitBtn.addEventListener('click', async function(event) {
   console.log(userInputIndex);
 
   await fetchData(userInputIndex);
-  //  location.reload();
+   location.reload();
 });
 
