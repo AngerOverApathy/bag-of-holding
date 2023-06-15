@@ -13,13 +13,13 @@ const fetchedEquipmentSchema = new Schema({
     damage_type: {
       name: String,
     },
+  },
     two_handed_damage: {
       damage_dice: String,
       damage_type: {
         name: String,
       },
     },
-  },
   range: {
     normal: {
       type: Number,
