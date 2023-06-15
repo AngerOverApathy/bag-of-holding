@@ -18,7 +18,7 @@ function toggleForm() {
   form.classList.toggle("hidden");
 }
 
-//update
+//update user-created equipment
 function handleUpdateFormSubmit(event, equipmentId) {
   event.preventDefault(); // Prevent the default form submission behavior
 
@@ -72,7 +72,7 @@ function handleUpdateButtonClick(equipmentId) {
   saveButton.style.display = 'block';
 }
 
-//delete
+//delete user-created equipment
 function deleteEquipment(id) {
   const confirmed = confirm("Are you sure you want to delete this equipment?");
   if (confirmed) {
@@ -89,4 +89,36 @@ function deleteEquipment(id) {
         // Handle error as needed
       });
   }
+}
+
+// delete button click event for fetched equipment
+document.addEventListener('DOMContentLoaded', function() {
+  const deleteButtons = document.querySelectorAll('.delete-button');
+
+  deleteButtons.forEach(function(button) {
+    button.addEventListener('click', function() {
+      const equipmentId = button.getAttribute('fetched-data-equipment-id');
+      deleteFetchedEquipment(equipmentId);
+    });
+  });
+});
+
+function deleteFetchedEquipment(equipmentId) {
+  // Send a DELETE request to the server
+  fetch(`/api/saveFetchedEquipment/${equipmentId}`, {
+    method: 'DELETE'
+  })    
+    .then(function(response) {
+      if (response.ok) {
+        // Reload the page to reflect the updated equipment list
+        location.reload();
+      } else {
+        console.error('Failed to delete equipment:', response.statusText);
+        // Handle error as needed
+      }
+    })
+    .catch(function(error) {
+      console.error('Failed to delete equipment:', error);
+      // Handle error as needed
+    });
 }

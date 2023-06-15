@@ -1,6 +1,20 @@
 const FetchedEquipment = require('../models/fetchedEquipment');
 
 const fetchedEquipmentController = {
+  //GET fetched equipment from DB
+  async getFetchedEquipment(req, res) {
+    try {
+      const fetchedEquipment = await FetchedEquipment.find();
+      const equipment = []; // Empty array since we're only rendering fetched equipment
+    
+      res.render('equipmentList', { equipment, fetchedEquipment });
+    } catch (error) {
+      console.error('Failed to fetch equipment:', error);
+      res.status(500).json({ error: 'Failed to fetch equipment' });
+    }
+  },
+
+  //save fetched equipment to DB
   saveFetchedEquipment(req, res) {
     const equipmentData = req.body;
 
@@ -15,15 +29,18 @@ const fetchedEquipmentController = {
       });
   },
 
-  async getFetchedEquipment(req, res) {
+  //delete fetched equipment
+  async deleteFetchedEquipment(req, res) {
+    const { id } = req.params;
     try {
-      const fetchedEquipment = await FetchedEquipment.find();
-      const equipment = []; // Empty array since we're only rendering fetched equipment
-    
-      res.render('equipmentList', { equipment, fetchedEquipment });
+      const deletedEquipment = await FetchedEquipment.findByIdAndDelete(id);
+      if (!deletedEquipment) {
+        return res.status(404).json({ error: 'Equipment not found' });
+      }
+      res.status(200).json({ message: 'Equipment deleted successfully' });
     } catch (error) {
-      console.error('Failed to fetch equipment:', error);
-      res.status(500).json({ error: 'Failed to fetch equipment' });
+      console.error('Failed to delete equipment:', error);
+      res.status(500).json({ error: 'Failed to delete equipment' });
     }
   }
 };

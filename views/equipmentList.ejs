@@ -156,6 +156,7 @@
         <div class="equipment-item-header">
           <strong>Name:</strong> <%= fetchedEquipmentData.name %><br>
           <button class="see-more-button">See More</button>
+          <button class="delete-button" fetched-data-equipment-id="<%= fetchedEquipmentData._id %>">Delete</button> <!-- Added delete button -->
           <div class="item-description hidden">
             <% if (fetchedEquipmentData.equipment_category !== '') { %>
               <strong>Equipment Type:</strong> <%= fetchedEquipmentData.equipment_category.name %><br>
