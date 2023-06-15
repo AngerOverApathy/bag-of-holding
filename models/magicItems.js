@@ -1,15 +1,26 @@
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 const magicItemsSchema = new Schema({
-    name: String,
-  equipmentCategory: {
-    name: String,
+  name: {
+    type: String,
+    required: true,
+  },
+  desc: {
+    type: [String],
+    default: [],
+  },
+  equipment_category: {
+    name: {
+      type: String,
+      default: '',
+    },
   },
   rarity: {
-    name: String,
+    name: {
+      type: String,
+    },
   },
-  description: [String],
 });
 
 const MagicItem = mongoose.model('MagicItem', magicItemsSchema);
