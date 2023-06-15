@@ -155,45 +155,48 @@
       <div class="equipment-item">
         <div class="equipment-item-header">
           <strong>Name:</strong> <%= fetchedEquipmentData.name %><br>
-          <% if (fetchedEquipmentData.equipment_category !== '') { %>
-            <strong>Equipment Type:</strong> <%= fetchedEquipmentData.equipment_category.name %><br>
-          <% } %>
+          <button class="see-more-button">See More</button>
+          <div class="item-description hidden">
+            <% if (fetchedEquipmentData.equipment_category !== '') { %>
+              <strong>Equipment Type:</strong> <%= fetchedEquipmentData.equipment_category.name %><br>
+            <% } %>
 
-          <% if (fetchedEquipmentData.category_range !== '') { %>
-            <strong>Weapon Category:</strong> <%= fetchedEquipmentData.category_range %><br>
-          <% } %>
+            <% if (fetchedEquipmentData.category_range !== '') { %>
+              <strong>Weapon Category:</strong> <%= fetchedEquipmentData.category_range %><br>
+            <% } %>
 
-          <% if (fetchedEquipmentData.damage.damage_dice && fetchedEquipmentData.damage.damage_type.name && fetchedEquipmentData.damage.damage_dice !== '' && fetchedEquipmentData.damage.damage_type.name !== '') { %>
-            <strong>Damage / Type:</strong> <%= fetchedEquipmentData.damage.damage_dice %> <%= fetchedEquipmentData.damage.damage_type.name %><br>
-          <% } %>
+            <% if (fetchedEquipmentData.damage.damage_dice && fetchedEquipmentData.damage.damage_type.name && fetchedEquipmentData.damage.damage_dice !== '' && fetchedEquipmentData.damage.damage_type.name !== '') { %>
+              <strong>Damage / Type:</strong> <%= fetchedEquipmentData.damage.damage_dice %> <%= fetchedEquipmentData.damage.damage_type.name %><br>
+            <% } %>
 
-          <% if (fetchedEquipmentData.two_handed_damage && fetchedEquipmentData.two_handed_damage.damage_dice && fetchedEquipmentData.two_handed_damage.damage_type && fetchedEquipmentData.two_handed_damage.damage_type.name) { %>
-          <strong>Two-Handed Damage:</strong> <%= fetchedEquipmentData.two_handed_damage.damage_dice %> <%= fetchedEquipmentData.two_handed_damage.damage_type.name %><br>
-          <% } %>
-          
-          <% if (fetchedEquipmentData.range.normal !== null) { %>
-            <strong>Range:</strong> <%= fetchedEquipmentData.range.normal %><br>
-          <% } %>
+            <% if (fetchedEquipmentData.two_handed_damage && fetchedEquipmentData.two_handed_damage.damage_dice && fetchedEquipmentData.two_handed_damage.damage_type && fetchedEquipmentData.two_handed_damage.damage_type.name) { %>
+            <strong>Two-Handed Damage:</strong> <%= fetchedEquipmentData.two_handed_damage.damage_dice %> <%= fetchedEquipmentData.two_handed_damage.damage_type.name %><br>
+            <% } %>
+            
+            <% if (fetchedEquipmentData.range.normal !== null) { %>
+              <strong>Range:</strong> <%= fetchedEquipmentData.range.normal %><br>
+            <% } %>
 
-          <% if (fetchedEquipmentData.throwRange.normal !== null && fetchedEquipmentData.throwRange.long !== null) { %>
-            <strong>Throw Range:</strong> Normal: <%= fetchedEquipmentData.throwRange.normal %>, Long: <%= fetchedEquipmentData.throwRange.long %><br>
-          <% } %>
+            <% if (fetchedEquipmentData.throwRange.normal !== null && fetchedEquipmentData.throwRange.long !== null) { %>
+              <strong>Throw Range:</strong> Normal: <%= fetchedEquipmentData.throwRange.normal %>, Long: <%= fetchedEquipmentData.throwRange.long %><br>
+            <% } %>
 
-          <% if (fetchedEquipmentData.properties && fetchedEquipmentData.properties.length > 0) { %>
-            <strong>Properties:</strong> <%= fetchedEquipmentData.properties.map(function(property) { return property.name; }).join(', ') %><br>
-          <% } %>
+            <% if (fetchedEquipmentData.properties && fetchedEquipmentData.properties.length > 0) { %>
+              <strong>Properties:</strong> <%= fetchedEquipmentData.properties.map(function(property) { return property.name; }).join(', ') %><br>
+            <% } %>
 
-          <% if (fetchedEquipmentData.cost.quantity !== null && fetchedEquipmentData.cost.unit !== '') { %>
-            <strong>Cost:</strong> <%= fetchedEquipmentData.cost.quantity %> <%= fetchedEquipmentData.cost.unit %><br>
-          <% } %>
+            <% if (fetchedEquipmentData.cost.quantity !== null && fetchedEquipmentData.cost.unit !== '') { %>
+              <strong>Cost:</strong> <%= fetchedEquipmentData.cost.quantity %> <%= fetchedEquipmentData.cost.unit %><br>
+            <% } %>
 
-          <% if (fetchedEquipmentData.weight !== null) { %>
-            <strong>Weight:</strong> <%= fetchedEquipmentData.weight %><br>
-          <% } %>
+            <% if (fetchedEquipmentData.weight !== null) { %>
+              <strong>Weight:</strong> <%= fetchedEquipmentData.weight %><br>
+            <% } %>
 
-          <% if (fetchedEquipmentData.desc && fetchedEquipmentData.desc.length > 0) { %>
-            <strong>Description:</strong> <%= fetchedEquipmentData.desc.join('<br>') %><br>
-          <% } %>
+            <% if (fetchedEquipmentData.desc && fetchedEquipmentData.desc.length > 0) { %>
+              <strong>Description:</strong> <%= fetchedEquipmentData.desc.join('<br>') %><br>
+            <% } %>
+          </div>
         </div>
       </div>
     </li>
@@ -205,18 +208,21 @@
     <div class="magic-item">
       <div class="magic-item-header">
         <strong>Name:</strong> <%= magicItem.name %><br>
-        <% if (magicItem.desc && magicItem.desc.length > 0) { %>
-          <strong>Description:</strong>
-          <% magicItem.desc.forEach(function(description) { %>
-            <%= description %><br>
-          <% }) %>
-        <% } %>
-        <% if (magicItem.equipment_category && magicItem.equipment_category.name) { %>
-          <strong>Equipment Category:</strong> <%= magicItem.equipment_category.name %><br>
-        <% } %>
-        <% if (magicItem.rarity && magicItem.rarity.name) { %>
-          <strong>Rarity:</strong> <%= magicItem.rarity.name %><br>
-        <% } %>
+        <button class="see-more-button">See More</button>
+        <div class="item-description hidden">
+          <% if (magicItem.desc && magicItem.desc.length > 0) { %>
+            <strong>Description:</strong>
+            <% magicItem.desc.forEach(function(description) { %>
+              <%= description %><br>
+            <% }) %>
+          <% } %>
+          <% if (magicItem.equipment_category && magicItem.equipment_category.name) { %>
+            <strong>Equipment Category:</strong> <%= magicItem.equipment_category.name %><br>
+          <% } %>
+          <% if (magicItem.rarity && magicItem.rarity.name) { %>
+            <strong>Rarity:</strong> <%= magicItem.rarity.name %><br>
+          <% } %>
+        </div>
       </div>
     </div>
   </li>
