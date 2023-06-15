@@ -18,12 +18,16 @@ const magicItemController = {
   async getMagicItems(req, res) {
     try {
       const magicItems = await MagicItem.find();
-      res.status(200).json(magicItems);
+      const equipment = []; // Empty array since we're only rendering magic items
+
+      console.log('getMagicItems function called');
+      
+      res.render('equipmentList', { equipment, magicItems });
     } catch (error) {
       console.error('Failed to fetch magic items:', error);
       res.status(500).json({ error: 'Failed to fetch magic items' });
     }
-  }
+  }  
 };
 
 module.exports = magicItemController;

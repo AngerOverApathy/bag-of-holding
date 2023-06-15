@@ -1,5 +1,4 @@
-const express = require('express');
-const router = express.Router();
+const router = require('express').Router();
 const fetchedEquipmentController = require('../../controllers/fetchedEquipmentController.js');
 
 router.get('/', fetchedEquipmentController.getFetchedEquipment);

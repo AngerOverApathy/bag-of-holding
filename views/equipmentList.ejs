@@ -198,8 +198,30 @@
       </div>
     </li>
   <% }) %>
-  
 
+  <!-- Render magic items -->
+<% magicItems.forEach(function(magicItem) { %>
+  <li data-equipment-id="<%= magicItem._id %>">
+    <div class="magic-item">
+      <div class="magic-item-header">
+        <strong>Name:</strong> <%= magicItem.name %><br>
+        <% if (magicItem.desc && magicItem.desc.length > 0) { %>
+          <strong>Description:</strong>
+          <% magicItem.desc.forEach(function(description) { %>
+            <%= description %><br>
+          <% }) %>
+        <% } %>
+        <% if (magicItem.equipment_category && magicItem.equipment_category.name) { %>
+          <strong>Equipment Category:</strong> <%= magicItem.equipment_category.name %><br>
+        <% } %>
+        <% if (magicItem.rarity && magicItem.rarity.name) { %>
+          <strong>Rarity:</strong> <%= magicItem.rarity.name %><br>
+        <% } %>
+      </div>
+    </div>
+  </li>
+<% }) %>
+  
   
 <!-- Create Equipment Form -->
 <div class="section">

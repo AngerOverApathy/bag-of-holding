@@ -1,5 +1,6 @@
 const Equipment = require('../models/equipmentItems');
-const FetchedEquipment = require('../models/fetchedEquipment')
+const FetchedEquipment = require('../models/fetchedEquipment');
+const MagicItem = require('../models/magicItems');
 
 const equipmentController = {
   // Render all equipment as a list
@@ -7,7 +8,8 @@ const equipmentController = {
     try {
       const equipment = await Equipment.find({});
       const fetchedEquipment = await FetchedEquipment.find({});
-      res.render('equipmentList', { equipment, fetchedEquipment });
+      const magicItems = await MagicItem.find({});
+      res.render('equipmentList', { equipment, fetchedEquipment, magicItems });
     } catch (error) {
       res.status(500).json({ error: 'Failed to retrieve equipment' });
     }

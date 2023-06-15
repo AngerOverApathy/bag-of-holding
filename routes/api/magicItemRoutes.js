@@ -1,8 +1,7 @@
-const express = require('express');
-const router = express.Router();
-const magicItemController = require('../../controllers/magicItemController');
+const router = require('express').Router();
+const magicItemController = require('../../controllers/magicItemController.js');
 
-router.post('/', magicItemController.saveMagicItemToDatabase);
 router.get('/', magicItemController.getMagicItems);
+router.post('/', magicItemController.saveMagicItemToDatabase);
 
 module.exports = router;
