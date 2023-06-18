@@ -3,6 +3,7 @@ const fetchedEquipmentController = require('../../controllers/fetchedEquipmentCo
 
 router.get('/', fetchedEquipmentController.getFetchedEquipment);
 router.post('/', fetchedEquipmentController.saveFetchedEquipment);
+router.put('/:id', fetchedEquipmentController.updateFetchedEquipment)
 router.delete('/:id', fetchedEquipmentController.deleteFetchedEquipment)
 
 module.exports = router;

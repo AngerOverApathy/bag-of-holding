@@ -29,6 +29,30 @@ const fetchedEquipmentController = {
       });
   },
 
+  //update
+  async updateFetchedEquipment(req, res) {
+    const { id } = req.params;
+    const updatedEquipmentData = req.body;
+
+    try {
+      const updatedEquipment = await FetchedEquipment.findByIdAndUpdate(
+        id,
+        updatedEquipmentData,
+        { new: true }
+      );
+
+      if (!updatedEquipment) {
+        return res.status(404).json({ error: 'Equipment not found' });
+      }
+
+      console.log('Equipment updated successfully:', updatedEquipment);
+      res.status(200).json(updatedEquipment);
+    } catch (error) {
+      console.error('Failed to update equipment:', error);
+      res.status(500).json({ error: 'Failed to update equipment' });
+    }
+  },
+
   //delete fetched equipment
   async deleteFetchedEquipment(req, res) {
     const { id } = req.params;

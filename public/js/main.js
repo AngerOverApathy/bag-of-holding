@@ -91,6 +91,39 @@ function deleteEquipment(id) {
   }
 }
 
+//update fetched non-magical equipment
+document.addEventListener('DOMContentLoaded', function() {
+  const updateButtons = document.querySelectorAll('#fetched-item-update-btn');
+
+  updateButtons.forEach(function(button) {
+    button.addEventListener('click', function() {
+      const equipmentId = button.getAttribute('data-equipment-id');
+      updateFetchedEquipment(equipmentId);
+    });
+  });
+});
+
+function updateFetchedEquipment(equipmentId) {
+  fetch(`/api/saveFetchedEquipment/${equipmentId}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+    .then(function(response) {
+      if (response.ok) {
+        console.log('Equipment updated successfully');
+        location.reload(); // Reload the page to reflect the updated equipment
+      } else {
+        console.error('Failed to update equipment:', response.statusText);
+      }
+    })
+    .catch(function(error) {
+      console.error('Failed to update equipment:', error);
+    });
+};
+
+
 // delete button click event for fetched equipment
 document.addEventListener('DOMContentLoaded', function() {
   const deleteButtons = document.querySelectorAll('.delete-button');
