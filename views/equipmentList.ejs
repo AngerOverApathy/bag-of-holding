@@ -210,6 +210,7 @@
       <div class="magic-item-header">
         <strong>Name:</strong> <%= magicItem.name %><br>
         <button class="see-more-button">See More</button>
+        <button id="magic-item-delete-btn" data-magic-item-id="<%= magicItem._id %>">Delete</button>
         <div class="item-description hidden">
           <% if (magicItem.desc && magicItem.desc.length > 0) { %>
             <strong>Description:</strong>

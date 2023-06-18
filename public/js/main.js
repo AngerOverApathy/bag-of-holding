@@ -122,3 +122,35 @@ function deleteFetchedEquipment(equipmentId) {
       // Handle error as needed
     });
 }
+
+// delete button click event for magic items
+document.addEventListener('DOMContentLoaded', function() {
+  const deleteButtons = document.querySelectorAll('#magic-item-delete-btn');
+
+  deleteButtons.forEach(function(button) {
+    button.addEventListener('click', function() {
+      const magicItemId = button.getAttribute('data-magic-item-id');
+      deleteMagicItem(magicItemId);
+    });
+  });
+});
+
+function deleteMagicItem(magicItemId) {
+  // Send a DELETE request to the server
+  fetch(`/api/saveMagicItem/${magicItemId}`, {
+    method: 'DELETE'
+  })    
+    .then(function(response) {
+      if (response.ok) {
+        // Reload the page to reflect the updated magic items list
+        location.reload();
+      } else {
+        console.error('Failed to delete magic item:', response.statusText);
+        // Handle error as needed
+      }
+    })
+    .catch(function(error) {
+      console.error('Failed to delete magic item:', error);
+      // Handle error as needed
+    });
+}
