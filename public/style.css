@@ -1,7 +1,35 @@
+body {
+    margin: 0;
+}
+
+.heading {
+    text-align: center;
+}
+
 .container {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20em, 1fr));
+    grid-gap: 1em;
+    justify-content: space-around;
+    padding: 0 1em;
+    margin: 2em;
 } 
+
+.item-description {
+    display: flex; /* Set display to flex */
+    flex-wrap: wrap; /* Allow wrapping of content */
+    align-items: flex-start;
+}
+
+.item-description strong {
+    flex-basis: 120px; /* Set a fixed width for the labels to create alignment */
+    flex-shrink: 0; /* Prevent labels from shrinking */
+}
+
+.item-description br {
+    display: none; /* Hide line breaks to keep the content in a single line */
+}
+
 
 .hidden {
     visibility: hidden;
