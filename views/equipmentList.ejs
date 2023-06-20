@@ -30,52 +30,77 @@
         <div class="item-description hidden">
           <!-- Display Equipment Details -->
           <% if (equipmentData.equipmentCategory !== '') { %>
-          <strong>Equipment Category:</strong> <%= equipmentData.equipmentCategory %><br>
+            <div class='item-line'>
+              <strong>Equipment Category:</strong> <%= equipmentData.equipmentCategory %><br>
+            </div>
           <% } %>
-
+          
           <% if (equipmentData.category !== '') { %>
-          <strong>Weapon Category:</strong> <%= equipmentData.category %><br>
+            <div class='item-line'>
+              <strong>Weapon Category:</strong> <%= equipmentData.category %><br>
+            </div>
           <% } %>
-
+          
           <% if (equipmentData.rarity && equipmentData.rarity !== '') { %>
-          <strong>Rarity:</strong> <%= equipmentData.rarity %><br>
+            <div class='item-line'>
+              <strong>Rarity:</strong> <%= equipmentData.rarity %><br>
+            </div>
           <% } %>
-
+          
           <% if (equipmentData.requiresAttunement !== undefined) { %>
-          <strong>Requires Attunement:</strong> <%= equipmentData.requiresAttunement ? 'Yes' : 'No' %><br>
+            <div class='item-line'>
+              <strong>Requires Attunement:</strong> <%= equipmentData.requiresAttunement ? 'Yes' : 'No' %><br>
+            </div>
           <% } %>
-
+          
           <% if (equipmentData.damage_dice && equipmentData.damage_type_name && equipmentData.damage_dice !== '' && equipmentData.damage_type_name !== '') { %>
-          <strong>Damage / Type:</strong> <%= equipmentData.damage_dice %> <%= equipmentData.damage_type_name %><br>
+            <div class='item-line'>
+              <strong>Damage / Type:</strong> <%= equipmentData.damage_dice %> <%= equipmentData.damage_type_name %><br>
+            </div>
           <% } %>
-
+          
           <% if (equipmentData.two_handed_damage_dice && equipmentData.two_handed_damage_dice !== '') { %>
-          <strong>Two-Handed Damage:</strong> <%= equipmentData.two_handed_damage_dice %><br>
+            <div class='item-line'>
+              <strong>Two-Handed Damage:</strong> <%= equipmentData.two_handed_damage_dice %><br>
+            </div>
           <% } %>
-
+          
           <% if (equipmentData.range_normal && equipmentData.range_normal !== '') { %>
-          <strong>Range:</strong> <%= equipmentData.range_normal %><br>
+            <div class='item-line'>
+              <strong>Range:</strong> <%= equipmentData.range_normal %><br>
+            </div>
           <% } %>
-
+          
           <% if (equipmentData.throw_range_normal && equipmentData.throw_range_long && equipmentData.throw_range_normal !== '' && equipmentData.throw_range_long !== '') { %>
-          <strong>Throw Range:</strong> Normal: <%= equipmentData.throw_range_normal %>, Long: <%= equipmentData.throw_range_long %><br>
+            <div class='item-line'>
+              <strong>Throw Range:</strong> Normal: <%= equipmentData.throw_range_normal %>, Long: <%= equipmentData.throw_range_long %><br>
+            </div>
           <% } %>
-
+          
           <% if (equipmentData.properties && equipmentData.properties.length > 0 && equipmentData.properties[0] !== '') { %>
-          <strong>Properties:</strong> <%= equipmentData.properties.join(', ') %><br>
+            <div class='item-line'>
+              <strong>Properties:</strong> <%= equipmentData.properties.join(', ') %><br>
+            </div>
           <% } %>
-
+          
           <% if (equipmentData.cost_quantity !== '' && equipmentData.cost_unit !== '') { %>
-          <strong>Cost:</strong> <%= equipmentData.cost_quantity %> <%= equipmentData.cost_unit %><br>
+            <div class='item-line'>
+              <strong>Cost:</strong> <%= equipmentData.cost_quantity %> <%= equipmentData.cost_unit %><br>
+            </div>
           <% } %>
-
+          
           <% if (equipmentData.weight && equipmentData.weight !== '') { %>
-          <strong>Weight:</strong> <%= equipmentData.weight %><br>
+            <div class='item-line'>
+              <strong>Weight:</strong> <%= equipmentData.weight %><br>
+            </div>
+          <% } %>
+          
+          <% if (equipmentData.desc && equipmentData.desc.length > 0 && equipmentData.desc[0] !== '') { %>
+            <div class='item-line'>
+              <strong>Description:</strong> <%= equipmentData.desc.join('<br>') %><br>
+            </div>
           <% } %>
 
-          <% if (equipmentData.desc && equipmentData.desc.length > 0 && equipmentData.desc[0] !== '') { %>
-          <strong>Description:</strong> <%= equipmentData.desc.join('<br>') %><br>
-          <% } %>
         </div>
       </div>
     </li>
@@ -155,44 +180,64 @@
             <button class="see-more-button">See More</button>
             <div class="item-description hidden">
               <% if (fetchedEquipmentData.equipment_category !== '') { %>
-                <strong>Equipment Type:</strong> <%= fetchedEquipmentData.equipment_category.name %><br>
+                <div class='item-line'>
+                  <strong>Equipment Type:</strong> <%= fetchedEquipmentData.equipment_category.name %><br>
+                </div>
               <% } %>
-
+              
               <% if (fetchedEquipmentData.category_range !== '') { %>
-                <strong>Weapon Category:</strong> <%= fetchedEquipmentData.category_range %><br>
+                <div class='item-line'>
+                  <strong>Weapon Category:</strong> <%= fetchedEquipmentData.category_range %><br>
+                </div>
               <% } %>
-
+              
               <% if (fetchedEquipmentData.damage.damage_dice && fetchedEquipmentData.damage.damage_type.name && fetchedEquipmentData.damage.damage_dice !== '' && fetchedEquipmentData.damage.damage_type.name !== '') { %>
-                <strong>Damage / Type:</strong> <%= fetchedEquipmentData.damage.damage_dice %> <%= fetchedEquipmentData.damage.damage_type.name %><br>
+                <div class='item-line'>
+                  <strong>Damage / Type:</strong> <%= fetchedEquipmentData.damage.damage_dice %> <%= fetchedEquipmentData.damage.damage_type.name %><br>
+                </div>
               <% } %>
-
+              
               <% if (fetchedEquipmentData.two_handed_damage && fetchedEquipmentData.two_handed_damage.damage_dice && fetchedEquipmentData.two_handed_damage.damage_type && fetchedEquipmentData.two_handed_damage.damage_type.name) { %>
-              <strong>Two-Handed Damage:</strong> <%= fetchedEquipmentData.two_handed_damage.damage_dice %> <%= fetchedEquipmentData.two_handed_damage.damage_type.name %><br>
+                <div class='item-line'>
+                  <strong>Two-Handed Damage:</strong> <%= fetchedEquipmentData.two_handed_damage.damage_dice %> <%= fetchedEquipmentData.two_handed_damage.damage_type.name %><br>
+                </div>
               <% } %>
               
               <% if (fetchedEquipmentData.range.normal !== null) { %>
-                <strong>Range:</strong> <%= fetchedEquipmentData.range.normal %><br>
+                <div class='item-line'>
+                  <strong>Range:</strong> <%= fetchedEquipmentData.range.normal %><br>
+                </div>
               <% } %>
-
+              
               <% if (fetchedEquipmentData.throwRange.normal !== null && fetchedEquipmentData.throwRange.long !== null) { %>
-                <strong>Throw Range:</strong> Normal: <%= fetchedEquipmentData.throwRange.normal %>, Long: <%= fetchedEquipmentData.throwRange.long %><br>
+                <div class='item-line'>
+                  <strong>Throw Range:</strong> Normal: <%= fetchedEquipmentData.throwRange.normal %>, Long: <%= fetchedEquipmentData.throwRange.long %><br>
+                </div>
               <% } %>
-
+              
               <% if (fetchedEquipmentData.properties && fetchedEquipmentData.properties.length > 0) { %>
-                <strong>Properties:</strong> <%= fetchedEquipmentData.properties.map(function(property) { return property.name; }).join(', ') %><br>
+                <div class='item-line'>
+                  <strong>Properties:</strong> <%= fetchedEquipmentData.properties.map(function(property) { return property.name; }).join(', ') %><br>
+                </div>
               <% } %>
-
+              
               <% if (fetchedEquipmentData.cost.quantity !== null && fetchedEquipmentData.cost.unit !== '') { %>
-                <strong>Cost:</strong> <%= fetchedEquipmentData.cost.quantity %> <%= fetchedEquipmentData.cost.unit %><br>
+                <div class='item-line'>
+                  <strong>Cost:</strong> <%= fetchedEquipmentData.cost.quantity %> <%= fetchedEquipmentData.cost.unit %><br>
+                </div>
               <% } %>
-
+              
               <% if (fetchedEquipmentData.weight !== null) { %>
-                <strong>Weight:</strong> <%= fetchedEquipmentData.weight %><br>
+                <div class='item-line'>
+                  <strong>Weight:</strong> <%= fetchedEquipmentData.weight %><br>
+                </div>
               <% } %>
-
+              
               <% if (fetchedEquipmentData.desc && fetchedEquipmentData.desc.length > 0) { %>
-                <strong>Description:</strong> <%= fetchedEquipmentData.desc.join('<br>') %><br>
-              <% } %>
+                <div class='item-line'>
+                  <strong>Description:</strong> <%= fetchedEquipmentData.desc.join('<br>') %><br>
+                </div>
+              <% } %>              
           </div>
         </div>
       </li>
@@ -266,18 +311,28 @@
           <button class="see-more-button">See More</button>
           <button id="magic-item-delete-btn" data-magic-item-id="<%= magicItem._id %>">Delete</button>
           <div class="item-description hidden">
+            
             <% if (magicItem.desc && magicItem.desc.length > 0) { %>
-              <strong>Description:</strong>
-              <% magicItem.desc.forEach(function(description) { %>
-                <%= description %><br>
-              <% }) %>
+              <div class='item-line'>
+                <strong>Description:</strong><br>
+                <% magicItem.desc.forEach(function(description) { %>
+                  <%= description %><br>
+                <% }) %>
+              </div>
             <% } %>
+            
             <% if (magicItem.equipment_category && magicItem.equipment_category.name) { %>
-              <strong>Equipment Category:</strong> <%= magicItem.equipment_category.name %><br>
+              <div class='item-line'>
+                <strong>Equipment Category:</strong> <%= magicItem.equipment_category.name %><br>
+              </div>
             <% } %>
+            
             <% if (magicItem.rarity && magicItem.rarity.name) { %>
-              <strong>Rarity:</strong> <%= magicItem.rarity.name %><br>
+              <div class='item-line'>
+                <strong>Rarity:</strong> <%= magicItem.rarity.name %><br>
+              </div>
             <% } %>
+            
         </div>
       </div>
     </li>
