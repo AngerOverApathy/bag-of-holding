@@ -15,11 +15,6 @@
 <input type="text" id="userInput" name="userInput">
 <button id="submit">Add Item</button>
 
-<h1>Dimensional Depot</h1>
-
-<label for="userInput">Search for items to add to your character's inventory:</label>
-<input type="text" id="userInput" name="userInput">
-<button id="submit">Add Item</button>
 
 <h2>Equipment</h2>
 
@@ -84,7 +79,7 @@
     </div>
   </li>
 
-  <!--update equipment form-->
+  <!--update equipment form; keep in ul so form can get equipmentData-->
   <form id="updateForm-<%= equipmentData._id %>" class="update-form" style="display: none;">
     <label for="update-name-<%= equipmentData._id %>">Name:</label>
     <input type="text" id="update-name-<%= equipmentData._id %>" name="name" value="<%= equipmentData.name %>" placeholder="Name"><br><br>
@@ -142,150 +137,151 @@
 
     <input type="submit" id="saveButton-<%= equipmentData._id %>" value="Save Edit" style="display: none;">
   </form>
-
-  <button id="updateButton-<%= equipmentData._id %>" class="update-button" onclick="handleUpdateButtonClick('<%= equipmentData._id %>')">Update</button>
+  <!--end update form-->
+<!--<button id="updateButton-<%= equipmentData._id %>" class="update-button" onclick="handleUpdateButtonClick('<%= equipmentData._id %>')">Update</button> -->
   <button class="delete-button" onclick="deleteEquipment('<%= equipmentData._id %>')">Delete</button>
 <% }) %>
 </ul>
 
 <!-- Render fetched equipment -->
-<% fetchedEquipment.forEach(function(fetchedEquipmentData) { %>
-  <li data-equipment-id="<%= fetchedEquipmentData._id %>">
-    <div class="item">
-      <div class="fetched-equipment-item-header">
-        <strong>Name:</strong> <%= fetchedEquipmentData.name %><br>
+  <ul id="fetched-equipment">
+  <% fetchedEquipment.forEach(function(fetchedEquipmentData) { %>
+    <li data-equipment-id="<%= fetchedEquipmentData._id %>">
+      <div class="item">
+        <div class="fetched-equipment-item-header">
+          <strong>Name:</strong> <%= fetchedEquipmentData.name %><br>
+        </div>
+          <button class="see-more-button">See More</button>
+          <div class="item-description hidden">
+            <% if (fetchedEquipmentData.equipment_category !== '') { %>
+              <strong>Equipment Type:</strong> <%= fetchedEquipmentData.equipment_category.name %><br>
+            <% } %>
+
+            <% if (fetchedEquipmentData.category_range !== '') { %>
+              <strong>Weapon Category:</strong> <%= fetchedEquipmentData.category_range %><br>
+            <% } %>
+
+            <% if (fetchedEquipmentData.damage.damage_dice && fetchedEquipmentData.damage.damage_type.name && fetchedEquipmentData.damage.damage_dice !== '' && fetchedEquipmentData.damage.damage_type.name !== '') { %>
+              <strong>Damage / Type:</strong> <%= fetchedEquipmentData.damage.damage_dice %> <%= fetchedEquipmentData.damage.damage_type.name %><br>
+            <% } %>
+
+            <% if (fetchedEquipmentData.two_handed_damage && fetchedEquipmentData.two_handed_damage.damage_dice && fetchedEquipmentData.two_handed_damage.damage_type && fetchedEquipmentData.two_handed_damage.damage_type.name) { %>
+            <strong>Two-Handed Damage:</strong> <%= fetchedEquipmentData.two_handed_damage.damage_dice %> <%= fetchedEquipmentData.two_handed_damage.damage_type.name %><br>
+            <% } %>
+            
+            <% if (fetchedEquipmentData.range.normal !== null) { %>
+              <strong>Range:</strong> <%= fetchedEquipmentData.range.normal %><br>
+            <% } %>
+
+            <% if (fetchedEquipmentData.throwRange.normal !== null && fetchedEquipmentData.throwRange.long !== null) { %>
+              <strong>Throw Range:</strong> Normal: <%= fetchedEquipmentData.throwRange.normal %>, Long: <%= fetchedEquipmentData.throwRange.long %><br>
+            <% } %>
+
+            <% if (fetchedEquipmentData.properties && fetchedEquipmentData.properties.length > 0) { %>
+              <strong>Properties:</strong> <%= fetchedEquipmentData.properties.map(function(property) { return property.name; }).join(', ') %><br>
+            <% } %>
+
+            <% if (fetchedEquipmentData.cost.quantity !== null && fetchedEquipmentData.cost.unit !== '') { %>
+              <strong>Cost:</strong> <%= fetchedEquipmentData.cost.quantity %> <%= fetchedEquipmentData.cost.unit %><br>
+            <% } %>
+
+            <% if (fetchedEquipmentData.weight !== null) { %>
+              <strong>Weight:</strong> <%= fetchedEquipmentData.weight %><br>
+            <% } %>
+
+            <% if (fetchedEquipmentData.desc && fetchedEquipmentData.desc.length > 0) { %>
+              <strong>Description:</strong> <%= fetchedEquipmentData.desc.join('<br>') %><br>
+            <% } %>
+        </div>
       </div>
+    </li>
+    
+  <!-- Update fetched equipment form -->
+  <form id="fetchedEquipmentUpdateForm-<%= fetchedEquipmentData._id %>" class="update-form" style="display: none;">
+
+    <label for="update-name-<%= fetchedEquipmentData._id %>">Name:</label>
+    <input type="text" id="update-name-<%= fetchedEquipmentData._id %>" name="name" value="<%= fetchedEquipmentData.name %>" placeholder="Name"><br><br>
+
+    <label for="category-<%= fetchedEquipmentData._id %>">Category:</label>
+    <input type="text" id="category-<%= fetchedEquipmentData._id %>" name="category" value="<%= fetchedEquipmentData.category %>" placeholder="Category"><br><br>
+
+    <label for="damage_dice-<%= fetchedEquipmentData._id %>">Damage Dice:</label>
+    <input type="text" id="damage_dice-<%= fetchedEquipmentData._id %>" name="damage_dice" value="<%= fetchedEquipmentData.damage_dice %>" placeholder="Damage Dice"><br><br>
+
+    <label for="damage_type_name-<%= fetchedEquipmentData._id %>">Damage Type:</label>
+    <input type="text" id="damage_type_name-<%= fetchedEquipmentData._id %>" name="damage_type_name" value="<%= fetchedEquipmentData.damage_type_name %>" placeholder="Damage Type"><br><br>
+
+    <label for="two_handed_damage_dice-<%= fetchedEquipmentData._id %>">Two-Handed Damage Dice:</label>
+    <input type="text" id="two_handed_damage_dice-<%= fetchedEquipmentData._id %>" name="two_handed_damage_dice" value="<%= fetchedEquipmentData.two_handed_damage_dice %>" placeholder="Two-Handed Damage Dice"><br><br>
+
+    <label for="two_handed_damage_type_name-<%= fetchedEquipmentData._id %>">Two-Handed Damage Type:</label>
+    <input type="text" id="two_handed_damage_type_name-<%= fetchedEquipmentData._id %>" name="two_handed_damage_type_name" value="<%= fetchedEquipmentData.two_handed_damage_type_name %>" placeholder="Two-Handed Damage Type"><br><br>
+
+    <label for="range_normal-<%= fetchedEquipmentData._id %>">Range (Normal):</label>
+    <input type="number" id="range_normal-<%= fetchedEquipmentData._id %>" name="range_normal" value="<%= fetchedEquipmentData.range_normal %>" placeholder="Range (Normal)"><br><br>
+
+    <label for="range_long-<%= fetchedEquipmentData._id %>">Range (Long):</label>
+    <input type="number" id="range_long-<%= fetchedEquipmentData._id %>" name="range_long" value="<%= fetchedEquipmentData.range_long %>" placeholder="Range (Long)"><br><br>
+
+    <label for="throw_range_normal-<%= fetchedEquipmentData._id %>">Throw Range (Normal):</label>
+    <input type="number" id="throw_range_normal-<%= fetchedEquipmentData._id %>" name="throw_range_normal" value="<%= fetchedEquipmentData.throw_range_normal %>" placeholder="Throw Range (Normal)"><br><br>
+
+    <label for="throw_range_long-<%= fetchedEquipmentData._id %>">Throw Range (Long):</label>
+    <input type="number" id="throw_range_long-<%= fetchedEquipmentData._id %>" name="throw_range_long" value="<%= fetchedEquipmentData.throw_range_long %>" placeholder="Throw Range (Long)"><br><br>
+
+    <label for="properties-<%= fetchedEquipmentData._id %>">Properties:</label>
+    <input type="text" id="properties-<%= fetchedEquipmentData._id %>" name="properties" value="<%= fetchedEquipmentData.properties %>" placeholder="Properties"><br><br>
+
+    <label for="equipmentCategory-<%= fetchedEquipmentData._id %>">Equipment Category:</label>
+    <input type="text" id="equipmentCategory-<%= fetchedEquipmentData._id %>" name="equipmentCategory" value="<%= fetchedEquipmentData.equipmentCategory %>" placeholder="Equipment Category"><br><br>
+
+    <label for="weight-<%= fetchedEquipmentData._id %>">Weight:</label>
+    <input type="number" id="weight-<%= fetchedEquipmentData._id %>" name="weight" value="<%= fetchedEquipmentData.weight %>" placeholder="Weight"><br><br>
+
+    <label for="cost_quantity-<%= fetchedEquipmentData._id %>">Cost Quantity:</label>
+    <input type="text" id="cost_quantity-<%= fetchedEquipmentData._id %>" name="cost_quantity" value="<%= fetchedEquipmentData.cost_quantity %>" placeholder="Cost Quantity"><br><br>
+
+    <label for="cost_unit-<%= fetchedEquipmentData._id %>">Cost Unit:</label>
+    <input type="text" id="cost_unit-<%= fetchedEquipmentData._id %>" name="cost_unit" value="<%= fetchedEquipmentData.cost_unit %>" placeholder="Cost Unit"><br><br>
+
+    <label for="desc-<%= fetchedEquipmentData._id %>">Description:</label>
+    <input type="text" id="desc-<%= fetchedEquipmentData._id %>" name="desc" value="<%= fetchedEquipmentData.desc %>" placeholder="Description"><br><br>
+
+    <input type="submit" id="saveFetchedButton-<%= fetchedEquipmentData._id %>" value="Save Edit" style="display: none;">
+  </form>
+    <button class="fetched-item-update-btn" id="updateFetch-<%= fetchedEquipmentData._id %>">Edit</button>
+    <button class="delete-button" fetched-data-equipment-id="<%= fetchedEquipmentData._id %>">Delete</button> <!-- Added delete button -->
+  <% }) %>
+</ul>
+
+<!-- Render magic items -->
+<ul id="magic-items">
+  <% magicItems.forEach(function(magicItem) { %>
+  <li data-equipment-id="<%= magicItem._id %>">
+    <div class="item">
+      <div class="magic-item-header">
+          <strong>Name:</strong> <%= magicItem.name %><br>
+        </div>
         <button class="see-more-button">See More</button>
+        <button id="magic-item-delete-btn" data-magic-item-id="<%= magicItem._id %>">Delete</button>
         <div class="item-description hidden">
-          <% if (fetchedEquipmentData.equipment_category !== '') { %>
-            <strong>Equipment Type:</strong> <%= fetchedEquipmentData.equipment_category.name %><br>
+          <% if (magicItem.desc && magicItem.desc.length > 0) { %>
+            <strong>Description:</strong>
+            <% magicItem.desc.forEach(function(description) { %>
+              <%= description %><br>
+            <% }) %>
           <% } %>
-
-          <% if (fetchedEquipmentData.category_range !== '') { %>
-            <strong>Weapon Category:</strong> <%= fetchedEquipmentData.category_range %><br>
+          <% if (magicItem.equipment_category && magicItem.equipment_category.name) { %>
+            <strong>Equipment Category:</strong> <%= magicItem.equipment_category.name %><br>
           <% } %>
-
-          <% if (fetchedEquipmentData.damage.damage_dice && fetchedEquipmentData.damage.damage_type.name && fetchedEquipmentData.damage.damage_dice !== '' && fetchedEquipmentData.damage.damage_type.name !== '') { %>
-            <strong>Damage / Type:</strong> <%= fetchedEquipmentData.damage.damage_dice %> <%= fetchedEquipmentData.damage.damage_type.name %><br>
-          <% } %>
-
-          <% if (fetchedEquipmentData.two_handed_damage && fetchedEquipmentData.two_handed_damage.damage_dice && fetchedEquipmentData.two_handed_damage.damage_type && fetchedEquipmentData.two_handed_damage.damage_type.name) { %>
-          <strong>Two-Handed Damage:</strong> <%= fetchedEquipmentData.two_handed_damage.damage_dice %> <%= fetchedEquipmentData.two_handed_damage.damage_type.name %><br>
-          <% } %>
-          
-          <% if (fetchedEquipmentData.range.normal !== null) { %>
-            <strong>Range:</strong> <%= fetchedEquipmentData.range.normal %><br>
-          <% } %>
-
-          <% if (fetchedEquipmentData.throwRange.normal !== null && fetchedEquipmentData.throwRange.long !== null) { %>
-            <strong>Throw Range:</strong> Normal: <%= fetchedEquipmentData.throwRange.normal %>, Long: <%= fetchedEquipmentData.throwRange.long %><br>
-          <% } %>
-
-          <% if (fetchedEquipmentData.properties && fetchedEquipmentData.properties.length > 0) { %>
-            <strong>Properties:</strong> <%= fetchedEquipmentData.properties.map(function(property) { return property.name; }).join(', ') %><br>
-          <% } %>
-
-          <% if (fetchedEquipmentData.cost.quantity !== null && fetchedEquipmentData.cost.unit !== '') { %>
-            <strong>Cost:</strong> <%= fetchedEquipmentData.cost.quantity %> <%= fetchedEquipmentData.cost.unit %><br>
-          <% } %>
-
-          <% if (fetchedEquipmentData.weight !== null) { %>
-            <strong>Weight:</strong> <%= fetchedEquipmentData.weight %><br>
-          <% } %>
-
-          <% if (fetchedEquipmentData.desc && fetchedEquipmentData.desc.length > 0) { %>
-            <strong>Description:</strong> <%= fetchedEquipmentData.desc.join('<br>') %><br>
+          <% if (magicItem.rarity && magicItem.rarity.name) { %>
+            <strong>Rarity:</strong> <%= magicItem.rarity.name %><br>
           <% } %>
       </div>
     </div>
   </li>
-  
-  <!-- <button class="fetched-item-update-btn" id="updateFetch-<%= fetchedEquipmentData._id %>" onclick="toggleForm('<%= fetchedEquipmentData._id %>')">Update</button> -->
-  <button class="delete-button" fetched-data-equipment-id="<%= fetchedEquipmentData._id %>">Delete</button> <!-- Added delete button -->
-<% }) %>
-
-<!-- Update fetched equipment form -->
-<form id="fetchedEquipmentUpdateForm-<%= fetchedEquipmentData._id %>" class="update-form" style="display: none;">
-  
-  <label for="update-name-<%= fetchedEquipmentData._id %>">Name:</label>
-  <input type="text" id="update-name-<%= fetchedEquipmentData._id %>" name="name" value="<%= fetchedEquipmentData.name %>" placeholder="Name"><br><br>
-
-  <label for="category-<%= fetchedEquipmentData._id %>">Category:</label>
-  <input type="text" id="category-<%= fetchedEquipmentData._id %>" name="category" value="<%= fetchedEquipmentData.category %>" placeholder="Category"><br><br>
-
-  <label for="damage_dice-<%= fetchedEquipmentData._id %>">Damage Dice:</label>
-  <input type="text" id="damage_dice-<%= fetchedEquipmentData._id %>" name="damage_dice" value="<%= fetchedEquipmentData.damage_dice %>" placeholder="Damage Dice"><br><br>
-
-  <label for="damage_type_name-<%= fetchedEquipmentData._id %>">Damage Type:</label>
-  <input type="text" id="damage_type_name-<%= fetchedEquipmentData._id %>" name="damage_type_name" value="<%= fetchedEquipmentData.damage_type_name %>" placeholder="Damage Type"><br><br>
-
-  <label for="two_handed_damage_dice-<%= fetchedEquipmentData._id %>">Two-Handed Damage Dice:</label>
-  <input type="text" id="two_handed_damage_dice-<%= fetchedEquipmentData._id %>" name="two_handed_damage_dice" value="<%= fetchedEquipmentData.two_handed_damage_dice %>" placeholder="Two-Handed Damage Dice"><br><br>
-
-  <label for="two_handed_damage_type_name-<%= fetchedEquipmentData._id %>">Two-Handed Damage Type:</label>
-  <input type="text" id="two_handed_damage_type_name-<%= fetchedEquipmentData._id %>" name="two_handed_damage_type_name" value="<%= fetchedEquipmentData.two_handed_damage_type_name %>" placeholder="Two-Handed Damage Type"><br><br>
-
-  <label for="range_normal-<%= fetchedEquipmentData._id %>">Range (Normal):</label>
-  <input type="number" id="range_normal-<%= fetchedEquipmentData._id %>" name="range_normal" value="<%= fetchedEquipmentData.range_normal %>" placeholder="Range (Normal)"><br><br>
-
-  <label for="range_long-<%= fetchedEquipmentData._id %>">Range (Long):</label>
-  <input type="number" id="range_long-<%= fetchedEquipmentData._id %>" name="range_long" value="<%= fetchedEquipmentData.range_long %>" placeholder="Range (Long)"><br><br>
-
-  <label for="throw_range_normal-<%= fetchedEquipmentData._id %>">Throw Range (Normal):</label>
-  <input type="number" id="throw_range_normal-<%= fetchedEquipmentData._id %>" name="throw_range_normal" value="<%= fetchedEquipmentData.throw_range_normal %>" placeholder="Throw Range (Normal)"><br><br>
-
-  <label for="throw_range_long-<%= fetchedEquipmentData._id %>">Throw Range (Long):</label>
-  <input type="number" id="throw_range_long-<%= fetchedEquipmentData._id %>" name="throw_range_long" value="<%= fetchedEquipmentData.throw_range_long %>" placeholder="Throw Range (Long)"><br><br>
-
-  <label for="properties-<%= fetchedEquipmentData._id %>">Properties:</label>
-  <input type="text" id="properties-<%= fetchedEquipmentData._id %>" name="properties" value="<%= fetchedEquipmentData.properties %>" placeholder="Properties"><br><br>
-
-  <label for="equipmentCategory-<%= fetchedEquipmentData._id %>">Equipment Category:</label>
-  <input type="text" id="equipmentCategory-<%= fetchedEquipmentData._id %>" name="equipmentCategory" value="<%= fetchedEquipmentData.equipmentCategory %>" placeholder="Equipment Category"><br><br>
-
-  <label for="weight-<%= fetchedEquipmentData._id %>">Weight:</label>
-  <input type="number" id="weight-<%= fetchedEquipmentData._id %>" name="weight" value="<%= fetchedEquipmentData.weight %>" placeholder="Weight"><br><br>
-
-  <label for="cost_quantity-<%= fetchedEquipmentData._id %>">Cost Quantity:</label>
-  <input type="text" id="cost_quantity-<%= fetchedEquipmentData._id %>" name="cost_quantity" value="<%= fetchedEquipmentData.cost_quantity %>" placeholder="Cost Quantity"><br><br>
-
-  <label for="cost_unit-<%= fetchedEquipmentData._id %>">Cost Unit:</label>
-  <input type="text" id="cost_unit-<%= fetchedEquipmentData._id %>" name="cost_unit" value="<%= fetchedEquipmentData.cost_unit %>" placeholder="Cost Unit"><br><br>
-
-  <label for="desc-<%= fetchedEquipmentData._id %>">Description:</label>
-  <input type="text" id="desc-<%= fetchedEquipmentData._id %>" name="desc" value="<%= fetchedEquipmentData.desc %>" placeholder="Description"><br><br>
-
-  <input type="submit" id="saveFetchedButton-<%= fetchedEquipmentData._id %>" value="Save Edit" style="display: none;">
-</form>
-
-
-<!-- Render magic items -->
-<% magicItems.forEach(function(magicItem) { %>
-<li data-equipment-id="<%= magicItem._id %>">
-  <div class="item">
-    <div class="magic-item-header">
-        <strong>Name:</strong> <%= magicItem.name %><br>
-      </div>
-      <button class="see-more-button">See More</button>
-      <button id="magic-item-delete-btn" data-magic-item-id="<%= magicItem._id %>">Delete</button>
-      <div class="item-description hidden">
-        <% if (magicItem.desc && magicItem.desc.length > 0) { %>
-          <strong>Description:</strong>
-          <% magicItem.desc.forEach(function(description) { %>
-            <%= description %><br>
-          <% }) %>
-        <% } %>
-        <% if (magicItem.equipment_category && magicItem.equipment_category.name) { %>
-          <strong>Equipment Category:</strong> <%= magicItem.equipment_category.name %><br>
-        <% } %>
-        <% if (magicItem.rarity && magicItem.rarity.name) { %>
-          <strong>Rarity:</strong> <%= magicItem.rarity.name %><br>
-        <% } %>
-    </div>
-  </div>
-</li>
-<% }) %>
-
+  <% }) %>
+</ul>
 
 <!-- Create Equipment Form -->
 <div class="section">

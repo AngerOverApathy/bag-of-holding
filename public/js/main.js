@@ -154,3 +154,72 @@ function deleteMagicItem(magicItemId) {
       // Handle error as needed
     });
 }
+
+//update fetched items
+document.addEventListener('DOMContentLoaded', function() {
+
+  function handleFetchedUpdateFormSubmit(event, fetchedEquipmentId) {
+    event.preventDefault(); // Prevent the default form submission behavior
+  
+    const updateForm = event.target;
+    const formData = new FormData(updateForm); // Get the form data using FormData
+  
+    const updateFetchedUrl = `/api/saveFetchedEquipment/${fetchedEquipmentId}`; // Construct the update URL
+  
+    // Update the equipment
+    fetch(updateFetchedUrl, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json', // Set the request content type to JSON
+      },
+      body: JSON.stringify(Object.fromEntries(formData)), // Convert the form data to a plain object and then to JSON
+    })
+      .then(response => response.json()) // Parse the response as JSON
+      .then(updatedFetchedEquipment => {
+        console.log('Equipment updated successfully:', updatedFetchedEquipment);
+        // Update the UI with the updated equipment data here
+        // Reload the page to reflect the changes
+        // location.reload();
+      })
+      .catch(error => {
+        console.error('Failed to update equipment:', error);
+        // location.reload(); // Handle the error and show an error message to the user
+      });
+  
+    // Toggle the visibility of the buttons
+    const updateFetchedButton = document.getElementById(`updateFetch-${fetchedEquipmentId}`);
+    const saveFetchedButton = document.getElementById(`saveFetchedButton-${fetchedEquipmentId}`);
+    updateFetchedButton.style.display = 'block';
+    saveFetchedButton.style.display = 'none';
+  }
+  
+
+  function handleFetchUpdateButtonClick(fetchedEquipmentId) {
+    // Find the corresponding form element
+    const updateForm = document.getElementById(`fetchedEquipmentUpdateForm-${fetchedEquipmentId}`);
+    if (updateForm) {
+      // Attach the form submission handler
+      updateForm.addEventListener('submit', event => handleFetchedUpdateFormSubmit(event, fetchedEquipmentId));
+      // Show the update form
+      updateForm.style.display = 'block';
+  
+      // Toggle the visibility of the buttons
+      const updateFetchedButton = document.getElementById(`updateFetch-${fetchedEquipmentId}`);
+      const saveFetchedButton = document.getElementById(`saveFetchedButton-${fetchedEquipmentId}`);
+      updateFetchedButton.style.display = 'none';
+      saveFetchedButton.style.display = 'block';
+    }
+  }
+
+  // Add event listener to the parent container of the "Edit" buttons
+  const fetchedEquipmentContainer = document.getElementById('fetched-equipment');
+  if (fetchedEquipmentContainer) {
+    fetchedEquipmentContainer.addEventListener('click', function(event) {
+      // Check if the clicked element is the "Edit" button
+      if (event.target.classList.contains('fetched-item-update-btn')) {
+        const fetchedEquipmentId = event.target.id.split('-')[1]; // Extract the ID from the button's ID attribute
+        handleFetchUpdateButtonClick(fetchedEquipmentId);
+      }
+    });
+  }
+})
