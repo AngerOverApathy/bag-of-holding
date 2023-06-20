@@ -9,7 +9,9 @@ const equipmentController = {
       const equipment = await Equipment.find({});
       const fetchedEquipment = await FetchedEquipment.find({});
       const magicItems = await MagicItem.find({});
-      res.render('equipmentList', { equipment, fetchedEquipment, magicItems });
+
+      const fetchedEquipmentData = fetchedEquipment.map(item => item.toObject()); // Convert Mongoose documents to plain JavaScript objects
+      res.render('equipmentList', { equipment, fetchedEquipment, magicItems, fetchedEquipmentData });
     } catch (error) {
       res.status(500).json({ error: 'Failed to retrieve equipment' });
     }

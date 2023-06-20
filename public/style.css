@@ -1,11 +1,7 @@
 .container {
     display: flex;
-}
-
-.column {
-    flex: 1;
-    padding: 1em;
-}
+    flex-wrap: wrap;
+} 
 
 .hidden {
     visibility: hidden;
@@ -26,6 +22,18 @@
 .save-button {
     display: none;
 }
+
+ul, li {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.item {
+    padding: 0.2em;
+    margin: 0.5em;
+}
+  
 
 @media screen and (max-width: 600px) {
     .container {

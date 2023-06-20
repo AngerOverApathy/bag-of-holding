@@ -7,7 +7,7 @@ const fetchedEquipmentController = {
       const fetchedEquipment = await FetchedEquipment.find();
       const equipment = []; // Empty array since we're only rendering fetched equipment
     
-      res.render('equipmentList', { equipment, fetchedEquipment });
+      res.render('equipmentList', { equipment, fetchedEquipment, fetchedEquipmentData: fetchedEquipmentData });
     } catch (error) {
       console.error('Failed to fetch equipment:', error);
       res.status(500).json({ error: 'Failed to fetch equipment' });
