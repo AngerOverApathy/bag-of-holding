@@ -164,6 +164,7 @@ i::before{
 .inventory-control {
     display: flex;
     align-items: center;
+    color: black;
 }
   
   

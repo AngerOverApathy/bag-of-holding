@@ -1,90 +1,46 @@
-const form = document.getElementById('equipmentForm');
-const closeButton = document.getElementById('close-button');
-const formSection = document.getElementById('create-form');
+const inventoryControls = document.querySelectorAll('.inventory-control');
 
-// Function to save inventory value to local storage
-const saveInventoryValue = (inventoryId, value) => {
-    localStorage.setItem(inventoryId, value);
-};
-  
-// Function to load inventory value from local storage
-const loadInventoryValue = (inventoryId) => {
-    return localStorage.getItem(inventoryId) || '0';
-};
+// Create a map to store the inventory values for each item ID
+const inventoryMap = new Map();
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Get all the inventory controls
-    const inventoryControls = document.querySelectorAll('.inventory-control');
-  
-    // Iterate over each inventory control
-    inventoryControls.forEach(function(inventoryControl) {
-      const decrementButton = inventoryControl.querySelector('.decrement-btn');
-      const incrementButton = inventoryControl.querySelector('.increment-btn');
-      const inventoryInput = inventoryControl.querySelector('.inventory-input');
-  
-      // Get the unique identifier for the fetched item
-      const itemId = inventoryControl.dataset.inventoryId;
-  
-      // Add event listener to the decrement button
-      decrementButton.addEventListener('click', function() {
-        decrementInventory(inventoryInput, itemId);
-      });
-  
-      // Add event listener to the increment button
-      incrementButton.addEventListener('click', function() {
-        incrementInventory(inventoryInput, itemId);
-      });
-  
-      // Retrieve the saved value from local storage
-      const savedInventory = localStorage.getItem(itemId);
-      if (savedInventory !== null) {
-        inventoryInput.value = savedInventory;
-      }
+// Retrieve inventory values from local storage or initialize them to 0
+inventoryControls.forEach(inventoryControl => {
+  const itemId = inventoryControl.dataset.inventoryId;
+  const storedValue = localStorage.getItem(itemId);
+  const initialValue = storedValue ? parseInt(storedValue) : 0;
+  inventoryMap.set(itemId, initialValue);
+  const inputField = inventoryControl.querySelector('.inventory-input');
+  inputField.value = initialValue;
 });
-  
-// Function to handle decrementing inventory
-function decrementInventory(inputElement, itemId) {
-      let inventoryValue = parseInt(inputElement.value);
-      if (inventoryValue > 0) {
-        inventoryValue--;
-        inputElement.value = inventoryValue;
-        saveToLocalStorage(itemId, inventoryValue);
-      }
+
+// Function to update inventory value and save it to local storage
+function updateInventory(itemId, value) {
+  inventoryMap.set(itemId, value);
+  localStorage.setItem(itemId, value);
+}
+
+// Iterate over each inventory control element
+inventoryControls.forEach(inventoryControl => {
+  const decrementBtn = inventoryControl.querySelector('.decrement-btn');
+  const inputField = inventoryControl.querySelector('.inventory-input');
+  const incrementBtn = inventoryControl.querySelector('.increment-btn');
+  const itemId = inventoryControl.dataset.inventoryId;
+
+  decrementBtn.addEventListener('click', () => {
+    let currentValue = inventoryMap.get(itemId);
+    if (currentValue > 0) {
+      currentValue--;
+      updateInventory(itemId, currentValue);
+      inputField.value = currentValue;
     }
-  
-    // Function to handle incrementing inventory
-    function incrementInventory(inputElement, itemId) {
-      let inventoryValue = parseInt(inputElement.value);
-      inventoryValue++;
-      inputElement.value = inventoryValue;
-      saveToLocalStorage(itemId, inventoryValue);
-    }
-  
-    // Function to save the inventory value to local storage
-    function saveToLocalStorage(itemId, value) {
-      localStorage.setItem(itemId, value);
-    }
+  });
+
+  incrementBtn.addEventListener('click', () => {
+    let currentValue = inventoryMap.get(itemId);
+    currentValue++;
+    updateInventory(itemId, currentValue);
+    inputField.value = currentValue;
+  });
 });
 
 
-  
-// Close form button
-closeButton.addEventListener('click', function() {
-    let isFormSubmitted = false; // Flag to track form submission
-    formSection.style.display = 'none';
-    if (!isFormSubmitted) {
-    // Reset the input values
-    const formInputs = formSection.querySelectorAll('input');
-    formInputs.forEach(input => {
-        input.value = '';
-    });
-    }
-  isFormSubmitted = false; // Reset the submission status
-});
-
-// Form submit event
-form.addEventListener('submit', function() {
-  isFormSubmitted = true; // Set the submission status to true
-  document.getElementById('formSubmittedInput').value = '1'; // Set the value to indicate form submission
-});
-  

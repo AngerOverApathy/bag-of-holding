@@ -19,9 +19,9 @@
       <!-- Create Equipment Form -->
       <div id="create-form">
       <div class="section">
-        <div class="section-header" onclick="toggleForm()">Can't find an item? <span class="underline">Create one here</span>!</div> 
+        <div class="section-header" onclick="toggleForm();">Can't find an item? <span class="underline">Create one here</span>!</div> 
       </div>
-      <form id="equipmentForm" action="/equipment" method="POST" class="section-content hidden" onsubmit="handleEquipmentFormSubmit(event)">
+      <form id="equipmentForm" action="/equipment" method="POST" class="section-content hidden">
         <button id="close-button">X</button>
           <!-- Equipment Fields -->
           <label for="name">Name:</label>
@@ -103,7 +103,7 @@
             </div>
             <div class="inventory-control" data-inventory-id="<%= equipmentData._id %>">
               <button class="inventory-btn decrement-btn">-</button>
-              <input type="number" class="inventory-input" value="0" min="0">
+              <input type="text" class="inventory-input" value="0" min="0">
               <button class="inventory-btn increment-btn">+</button>
             </div>  
           </div>          
@@ -262,7 +262,7 @@
               </div>
               <div class="inventory-control" data-inventory-id="<%= fetchedEquipmentData._id %>">
                 <button class="inventory-btn decrement-btn">-</button>
-                <input type="number" class="inventory-input" value="0" min="0">
+                <input type="text" class="inventory-input" value="0" min="0">
                 <button class="inventory-btn increment-btn">+</button>
               </div>  
             </div>     
@@ -402,11 +402,12 @@
                 <!-- <button class="fetched-item-update-btn" id="updateFetch-<%= fetchedEquipmentData._id %>">Edit</button>       -->
                 <button id="magic-item-delete-btn" data-magic-item-id="<%= magicItem._id %>"><i class="fa fa-trash" aria-hidden="true"></i></button>
               </div>
+ 
               <div class="inventory-control" data-inventory-id="<%= magicItem._id %>">
                 <button class="inventory-btn decrement-btn">-</button>
-                <input type="number" class="inventory-input" value="0" min="0">
+                <input type="text" class="inventory-input" data-item-id="<%= magicItem._id %>" value="0" min="0">
                 <button class="inventory-btn increment-btn">+</button>
-              </div>  
+              </div>
             </div>
 
               <button class="see-more-button">See More</button>
