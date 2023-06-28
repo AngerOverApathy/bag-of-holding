@@ -1,6 +1,7 @@
 const submitBtn = document.getElementById('submit');
 const equipmentList = document.getElementById('equipment');
 const magicItemsList = document.getElementById('magic-items');
+const alertContainer = document.getElementById('alert-container');
 
 // API endpoints
 const endpoints = [
@@ -33,10 +34,14 @@ const fetchData = async (index) => {
         // populateMagicItemsList(magicItemsData);
         saveMagicItemToDatabase(magicItemsData); // Save magic item data to the database
       } else {
+        alertContainer.textContent = 'ITEM DOES NOT EXIST';
+        alertContainer.style.display = 'block'; // Show the alert container
         console.error('Unknown data type:', data);
       }
   
     } catch (error) {
+      alertContainer.textContent = 'An error occurred while fetching the item. Please try again later.';
+      alertContainer.style.display = 'block'; // Show the alert container
       console.error('Error:', error);
     }
 };
@@ -89,7 +94,14 @@ submitBtn.addEventListener('click', async function(event) {
   const userInputIndex = document.getElementById('userInput').value;
   console.log(userInputIndex);
 
-  await fetchData(userInputIndex);
-   location.reload();
+  try {
+    await fetchData(userInputIndex);
+    location.reload(); // Reload the page to display the new item
+  } catch (error) {
+    console.error('Error:', error);
+    alertContainer.textContent = 'An error occurred while fetching the item. Please try again later.';
+    alertContainer.style.display = 'block'; // Show the alert container
+  }
 });
+
 

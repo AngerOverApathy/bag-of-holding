@@ -38,25 +38,27 @@ function handleUpdateFormSubmit(event, equipmentId) {
   // Handle the boolean value separately
   formDataObject.requiresAttunement = event.target.elements[`requiresAttunement-${equipmentId}`].checked;
 
-  // Update the equipment
-  fetch(updateUrl, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json', // Set the request content type to JSON
-    },
-    body: JSON.stringify(formDataObject), // Convert the form data object to JSON
+// Update the equipment
+fetch(updateUrl, {
+  method: 'PUT',
+  headers: {
+    'Content-Type': 'application/json', // Set the request content type to JSON
+  },
+  body: JSON.stringify(formDataObject), // Convert the form data object to JSON
+})
+  .then(response => response.json()) // Parse the response as JSON
+  .then(updatedEquipment => {
+    console.log('Equipment updated successfully:', updatedEquipment);
+    // Update the UI with the updated equipment data here
+    // Reload the page to reflect the changes
+    location.reload();
   })
-    .then(response => response.json()) // Parse the response as JSON
-    .then(updatedEquipment => {
-      console.log('Equipment updated successfully:', updatedEquipment);
-      // Update the UI with the updated equipment data here
-      // Reload the page to reflect the changes
-      location.reload();
-    })
-    .catch(error => {
-      console.error('Failed to update equipment:', error);
-      location.reload(); // Handle the error and show an error message to the user
-    });
+  .catch(error => {
+    console.error('Failed to update equipment:', error);
+    // Handle the error and show an error message to the user
+    alertContainer.textContent = 'Failed to update equipment. Please try again.';
+    alertContainer.style.display = 'block'; // Show the alert container
+  });
 
   // Toggle the visibility of the buttons
   const updateButton = document.getElementById(`updateButton-${equipmentId}`);
