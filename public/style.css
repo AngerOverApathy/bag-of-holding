@@ -11,6 +11,7 @@ body {
 .heading {
     text-align: center;
     color: antiquewhite;
+    font-size: 2em;
 }
 
 .banner {
@@ -48,24 +49,39 @@ ul,li {
     margin-bottom: 10px;
 }
 
-/*name, edit, deleter, amount display*/
+/*name, edit, delete, amount display*/
 .equipment-item-header {
     display: flex;
-
 }
+
+#equipmentForm {
+    border: solid black 1px;
+    background-color: bisque;
+    padding: 1em; 
+    color: black;
+    height:80%;
+    overflow-y:auto
+} 
   
 /* layout */
 .container {
-    background-color: rgba(0, 0, 0, 0.5);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 1.5em;
+    margin: 1.25em;
 }
 
 .item {
-    background-color: rgba(0.5, 0.5, 0.5, 0.5);
-    color:#f0f0f0
+    color:#f0f0f0;
+}
+
+.item-name {
+    font-size: 1.8em;
 }
 
 .single-item {
     border: solid rgb(244, 235, 235) 1px;
+    background-color: rgba(0.5, 0.5, 0.5, 0.5);
 }
   
 /* button and form styling */
@@ -79,9 +95,21 @@ ul,li {
 .see-more-button {
     background-color: #f0f0f0;
     color: #333;
-    padding: 5px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    margin: 0.25em;
+    padding: 0em 0.1em 0em 0.1em;
+    width: 5.3em;
+    height: 3em;
+    background-color: rgb(226, 214, 199);
+    color: black;
     cursor: pointer;
 }  
+
+i::before{
+    background:transparent;
+}
 
 #equipmentForm {
     position: fixed;
@@ -160,21 +188,36 @@ ul,li {
         color: black;
         height:80%;
         overflow-y:auto
-
     } 
 
     .container {
         display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        grid-gap: 0em;
+        margin: 0.15em;
         background-color: rgba(0, 0, 0, 0.5);
     }
+
+    .banner {
+        background-color: rgba(0, 0, 0, 0.5);
+        width: 100%; 
+        height: 20%;
+        font-size: 16px;
+        text-align: center;
+        justify-content: space-around;
+    } 
 
     .item {
         background-color: rgba(237, 229, 229, 0.5);
         color:#f0f0f0
     }
 
+    .item-name {
+        font-size: 1.2em;
+    }
+
     .single-item {
-        border: solid black 1px;
+        border: solid rgb(214, 203, 203) 1px;
         padding: 0.25em;
     }
 

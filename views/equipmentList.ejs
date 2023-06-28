@@ -97,9 +97,9 @@
         <li data-equipment-id="<%= equipmentData._id %>">
           <div class="equipment-item-header">
             <div class="name-and-buttons">
-              <strong><%= equipmentData.name %></strong>
-              <button id="updateButton-<%= equipmentData._id %>" class="update-button" onclick="handleUpdateButtonClick('<%= equipmentData._id %>')">Edit</button>
-              <button class="delete-button" onclick="deleteEquipment('<%= equipmentData._id %>')">Delete</button>
+              <strong class="item-name"><%= equipmentData.name %></strong>
+              <button class="update-button" id="updateButton-<%= equipmentData._id %>" class="update-button" onclick="handleUpdateButtonClick('<%= equipmentData._id %>')"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+              <button class="delete-button" onclick="deleteEquipment('<%= equipmentData._id %>')"><i class="fa fa-trash" aria-hidden="true"></i></button>
             </div>
             <div class="inventory-control" data-inventory-id="<%= equipmentData._id %>">
               <button class="inventory-btn decrement-btn">-</button>
@@ -241,7 +241,7 @@
         <label for="desc-<%= equipmentData._id %>">Description:</label>
         <input type="text" id="desc-<%= equipmentData._id %>" name="desc" value="<%= equipmentData.desc %>" placeholder="Description"><br><br>
 
-        <input type="submit" id="saveButton-<%= equipmentData._id %>" value="Save Edit" style="display: none;">
+        <input type="submit" class="save-button" id="saveButton-<%= equipmentData._id %>" value="Save Edit" style="display: none;">
       </form>
       <% }) %>
     </ul>
@@ -256,9 +256,9 @@
           <li data-equipment-id="<%= fetchedEquipmentData._id %>">
             <div class="equipment-item-header">
               <div class="name-and-buttons">
-                <strong><%= fetchedEquipmentData.name %></strong> 
+                <strong class="item-name"><%= fetchedEquipmentData.name %></strong> 
                 <!-- <button class="fetched-item-update-btn" id="updateFetch-<%= fetchedEquipmentData._id %>">Edit</button>       -->
-                <button class="delete-button" fetched-data-equipment-id="<%= fetchedEquipmentData._id %>">Delete</button>
+                <button class="delete-button" fetched-data-equipment-id="<%= fetchedEquipmentData._id %>"><i class="fa fa-trash" aria-hidden="true"></i></button>
               </div>
               <div class="inventory-control" data-inventory-id="<%= fetchedEquipmentData._id %>">
                 <button class="inventory-btn decrement-btn">-</button>
@@ -398,9 +398,9 @@
 
             <div class="equipment-item-header">
               <div class="name-and-buttons">
-                <strong><%= magicItem.name %></strong> 
+                <strong class="item-name"><%= magicItem.name %></strong> 
                 <!-- <button class="fetched-item-update-btn" id="updateFetch-<%= fetchedEquipmentData._id %>">Edit</button>       -->
-                <button id="magic-item-delete-btn" data-magic-item-id="<%= magicItem._id %>">Delete</button>
+                <button id="magic-item-delete-btn" data-magic-item-id="<%= magicItem._id %>"><i class="fa fa-trash" aria-hidden="true"></i></button>
               </div>
               <div class="inventory-control" data-inventory-id="<%= magicItem._id %>">
                 <button class="inventory-btn decrement-btn">-</button>
@@ -445,5 +445,6 @@
   <script src="/js/formHandling.js"></script>
   <script src="/js/app.js"></script>
   <script src="js/inventory.js"></script>
+  <script src="https://use.fontawesome.com/2c89bf3dc9.js"></script>
 </body>
 </html>
