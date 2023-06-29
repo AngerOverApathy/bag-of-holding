@@ -2,7 +2,7 @@ const path = require('path');
 const router = require('express').Router();
 
 router.get('/', (req, res) => {
-    res.render('equipmentList');
+    res.render('index');
 });
 
 // router.get('/equipment', (req,res)=>{
