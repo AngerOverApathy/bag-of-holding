@@ -14,13 +14,19 @@ seeMoreButtons.forEach(button => {
   });
 });
 
+//toggle how-to-use section
+function toggleFaq() {
+  let form = document.getElementById("myDiv");
+  form.classList.toggle("hidden");
+}
+
 //show creation form
 function toggleForm() {
   let form = document.getElementById("equipmentForm");
   form.classList.toggle("hidden");
 }
 
-//close creartion form
+//close creation form
 closeButton.addEventListener('click', event => {
   event.preventDefault(); // Prevent default form submission behavior
   equipmentForm.classList.add('hidden'); // Hide the form

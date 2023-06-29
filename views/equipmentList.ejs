@@ -12,6 +12,20 @@
 <div class="heading">
   <div class="banner">
     <h1>Dimensional Depot</h1>
+    
+    <div onclick="toggleFaq();">How To Use<span class="underline">(First Time Users Please Read)</span>
+      <div id="myDiv" class="hidden"> 
+        <button id="close-faq">X</button>
+        <h2>Thanks for checking out Dimensional Depot</h2>
+        <p>This app uses DnD 5e's free API. As such, the items that can be pulled from DnD Beyond and added to your inventory are limited. But that's okay! Whatever you can't pull, you can create using the creation form.<br/>
+          The search feature is a little finicky. For example, trying to add a crossbow requires a specific syntax. Look at this picture from DnD Beyond:<br/>
+          <img src="/public/img/sample.png" alt="Crossbow Search Example"><br/>
+          See how it's labeled 'Crossbow, light'? To get it to correctly search in this app, you would want to type *without the quotation marks* "crossbow light".<br/>
+          If you're still having trouble with certain items, check for the item on DnD Beyond to ensure that the syntax is correct. Items with normal spacing like "Bag of Holding" will search normally, as that is how it's written in DnD Beyond.<br/>
+        </p>
+      </div>   
+    </div>   
+    
     <div class="search">
       <label for="userInput">Search for items to add to your character's inventory</label>
       <input type="text" id="userInput" name="userInput">

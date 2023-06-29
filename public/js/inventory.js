@@ -42,5 +42,3 @@ inventoryControls.forEach(inventoryControl => {
     inputField.value = currentValue;
   });
 });
-
-
