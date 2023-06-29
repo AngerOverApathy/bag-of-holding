@@ -5,7 +5,7 @@ const Equipment = require('../../models/equipmentItems');
 router.get('/', async (req, res) => {
   try {
     const equipment = await Equipment.find({});
-    res.render('equipmentList', { equipment });
+    res.render('equipmentList', { equipment, fetchedEquipment, magicItems, fetchedEquipmentData });
   } catch (error) {
     res.status(500).json({ error: 'Failed to retrieve equipment' });
   }

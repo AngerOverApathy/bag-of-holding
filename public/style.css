@@ -54,7 +54,7 @@ ul,li {
     display: flex;
 }
 
-#equipmentForm, #myDiv {
+#equipmentForm {
     border: solid black 1px;
     background-color: bisque;
     padding: 1em; 
@@ -111,7 +111,7 @@ i::before{
     background:transparent;
 }
 
-#equipmentForm {
+#equipmentForm, #myDiv {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -183,6 +183,7 @@ i::before{
     }
 
     #equipmentForm, #myDiv {
+        width: 90%;
         border: solid black 1px;
         background-color: bisque;
         padding: 1em; 

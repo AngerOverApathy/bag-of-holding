@@ -13,7 +13,6 @@ const equipmentController = {
       const fetchedEquipmentData = fetchedEquipment.map(item => item.toObject()); // Convert Mongoose documents to plain JavaScript objects
       res.render('equipmentList', { equipment, fetchedEquipment, magicItems, fetchedEquipmentData });
     } catch (error) {
-      console.log(error, 'log error');
       res.status(500).json({ error: 'Failed to retrieve equipment' });
     }
   },
