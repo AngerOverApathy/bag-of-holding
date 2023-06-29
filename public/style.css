@@ -239,37 +239,3 @@ i::before{
 
   }
 
-
-
-/* 
-.container {
-    border: solid black 2px;
-}
-  
-  .item {
-    background-color: #f0f0f0;
-}
-  
-.single-item {
-    border: solid black 1px;
-    margin: 0.25em;
-    padding: 0.25em;
-}
-
-.container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    grid-gap: 1.5em;
-    margin: 1.25em;
-    border: solid black 2px;
-}
-  
-  .item {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-gap: 0;
-    padding: 0.25em;
-    background-color: #f0f0f0;
-    border: solid black 0.25em;
-    break-inside: avoid;
-} */
